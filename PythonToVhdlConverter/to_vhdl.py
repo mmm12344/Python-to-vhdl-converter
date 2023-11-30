@@ -1,4 +1,4 @@
 
 
-def convert_to_vhdl(entity):
-    return entity.convert_entity()
+def convert_to_vhdl(entity, arch):
+    return entity.convert_entity() + "\n" + arch.convert_arch()
