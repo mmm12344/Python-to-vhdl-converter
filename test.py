@@ -1,6 +1,6 @@
 from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signals, Architecture
 from PythonToVhdlConverter.to_vhdl import convert_to_vhdl
-from PythonToVhdlConverter.logic_converter import nand, xnor, nor
+from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla
 import time
 
 
@@ -23,7 +23,6 @@ class Arch():
         
 entity = Entity(Mux())
 arch = Architecture(Arch())
-
 
 
 print(convert_to_vhdl(entity, arch))
