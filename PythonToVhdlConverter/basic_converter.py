@@ -1,4 +1,5 @@
 from .validation import validate_data_types
+from .logic_converter import parse_file
 
 
 
@@ -22,7 +23,7 @@ class Architecture():
     def __init__(self, architecture_class):
         self.architecture_class = architecture_class
     def convert_arch(self):
-        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{self.create_signals()}\nbegin\n\nend;"
+        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{self.create_signals()}\nbegin\n{parse_file(self.architecture_class.path)}\nend;"
     def create_signals(self):
         signals = ""
         for signal in self.architecture_class.signals:

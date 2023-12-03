@@ -1,3 +1,6 @@
+from .lexer import parse_text
+
+
 
 class Infix():
     def __init__(self):
@@ -25,6 +28,29 @@ def save_output(lines):
         
 def find_leading_white_space(line):
     return len(line) - len(line.lstrip())
+
+
+def parse_file(file_path):
+    convert_to_txt(file_path)
+    lines = []
+    with open("input.txt", "r") as file:
+        lines = file.readlines()
+        
+    logic_index = lines.index("@logic\n")
+    lines = lines[logic_index+2:]
+    
+    parsed_text = []
+    for line in lines:
+        print(line)
+        if find_leading_white_space(line) < 2:
+            break
+        parsed_text.append(parse_text(line.strip()))
+        
+    print(parsed_text)
+        
+    return "\n".join(parsed_text)
+        
+        
             
 
             
