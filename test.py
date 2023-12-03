@@ -22,9 +22,6 @@ class Arch():
         self.name = "behavior"
         self.entity_name = "Mux"
         
-@logic
-def logic():
-    "a or b"
         
 entity = Entity(Mux())
 arch = Architecture(Arch())

@@ -1,6 +1,3 @@
-import os, re
-from .tokens import Parse
-
 
 class Infix():
     def __init__(self):

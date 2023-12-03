@@ -2,14 +2,47 @@ import re
 
 digits = "0123456789"
 literals = "thequickbrownfoxjumpsoverthelazydog"
-symbols = "_|<>-+*/%|^<>="
+symbols = "_|<>-+*/%|^<>=!"
 variable_regex_exp = "^([A-Z]|[a-z])+([0-9])*$"
 
 
-arithmatic_operators = ['-', '+', '*', '/', '%', '**']
-logical_operators = ['and', 'or', 'not', '|nand|', '|nor|', '^', '|xnor|']
-bitwise_operators = ['<<', '>>', '|sla|', '|sra|']
-assignment_operators = ['=']
+arithmatic_operators = []
+logical_operators = []
+bitwise_operators = []
+assignment_operators = []
+relational_operators = []
+
+def register_token(token, type):
+    if type == "arith":
+        arithmatic_operators.append(token.name)
+    elif type == "logic":
+        logical_operators.append(token.name)
+    elif type == "bitwise":
+        bitwise_operators.append(token.name)
+    elif type == "assignment":
+        assignment_operators.append(token.name)
+    elif type == "rel":
+        relational_operators.append(token.name)
+    else:
+        raise Exception(f"type not supported ({type})")
+        
+
+def register_tokens(*tokens):
+    for token in tokens:
+        register_token(token, token.type)
+        
+
+
+class Token:
+    def __init__(self, token_name, replace_with, type, in_middle=True):
+        self.name = token_name
+        self.replace_with = replace_with
+        self.type = type
+        self.in_middle = in_middle
+    def __repr__(self):
+        return self.replace_with
+    def __str__(self):
+        return f"{self.token_name} => {self.replace_with} : {self.type}"
 
 
 class Lexer:
@@ -60,12 +93,13 @@ class Lexer:
             string += self.current_char
             self.advance()
         
-        if string in arithmatic_operators or string in logical_operators or string in bitwise_operators or string in assignment_operators:
+        if string in arithmatic_operators or string in logical_operators or string in bitwise_operators or string in assignment_operators or string in relational_operators:
             return string
         elif re.match(variable_regex_exp, string):
             return string
         else:
             raise Exception(f"Illegal string ({string})")
+
 
 
 def generate_tokens(text):
