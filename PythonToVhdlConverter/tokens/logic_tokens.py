@@ -1,53 +1,52 @@
 from tdparser import Token
 
 
-
 class And_tok(Token):
-    regexp = r"\band\b"
+    regexp = r"and"
     lpd = 20
        
     def led(self, left, context):
-        return left.text + " and " + self.text
+        return left.text + " and " + context.text
     
 class Not_tok(Token):
-    regex = r"\bnot\b"
+    regex = r"not"
     lpd = 90
     
     def led(self, left, context):
-        return left.text + " not " + self.text
+        return left.text + " not " + context.text
     
 class Or_tok(Token):
-    regex = r"\bor\b"
+    regex = r"or"
     lpd = 20
     
     def led(self, left, context):
-        return left.text + " or " + self.text
+        return left.text + " or " + context.text
     
 class Xor_tok(Token):
-    regex = r"\b^\b"
+    regex = r"\^"
     lpd = 20
     
     def led(self, left, context):
-        return left.text + " xor " + self.text
+        return left.text + " xor " + context.text
 
 class Nand_tok(Token):
-    regex = r"\b|nand|\b"
+    regex = r"|nand|"
     lpd = 20
     
     def led(self, left, context):
-        return left.text + " nand " + self.text
+        return left.text + " nand " + context.text
     
 class Nor_tok(Token):
-    regex = r"\b|nor|\b"
+    regex = r"|nor|"
     lpd = 20
     
     def led(self, left, context):
-        return left.text + " nor " + self.text
+        return left.text + " nor " + context.text
     
 class Xnor_tok(Token):
-    regex = r"\b|xnor|\b"
+    regex = r"|xnor|"
     lpd = 20
     
     def led(self, left, context):
-        return left.text, " xnor " + self.text
+        return left.text, " xnor " + context.text
 
