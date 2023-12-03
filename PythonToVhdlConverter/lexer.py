@@ -75,7 +75,6 @@ def generate_tokens(text):
     return tokens
 
 
-print(generate_tokens("mario = x + 1 and 10"))
             
         
         
