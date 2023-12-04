@@ -17,10 +17,11 @@ sla = Infix()
 def logic(func):
     return 0
 
-def convert_to_txt(file_path):
+def get_lines(file_path):
+
     with open(file_path, 'r') as f1:
-        with open("input.txt", 'w') as f2:
-            f2.write(f1.read())
+        lines = f1.readlines()
+    return lines
             
 def save_output(lines):
     with open("logic_out.txt", 'w') as file:
@@ -31,10 +32,7 @@ def find_leading_white_space(line):
 
 
 def parse_file(file_path):
-    convert_to_txt(file_path)
-    lines = []
-    with open("input.txt", "r") as file:
-        lines = file.readlines()
+    lines = get_lines(file_path)
         
     logic_index = lines.index("@logic\n")
     lines = lines[logic_index+2:]
