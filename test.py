@@ -12,7 +12,7 @@ class Mux():
         self.name = "Mux"
         self.inputs = [a]
         self.outputs = [b]
-        
+      
 class Arch():
     def __init__(self):
         d = Signals("D", "std_logic")
@@ -29,9 +29,12 @@ def logic():
     b = b << 1
     
     mario = 30 ** 4 % 15 |sra| 40
-        
+    
+    
 entity = Entity(Mux())
 arch = Architecture(Arch())
+
+
 
 
 print(convert_to_vhdl(entity, arch))
