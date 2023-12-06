@@ -102,6 +102,7 @@ class Capture:
     def capture_process(self):
         process_block_lines = []
         process_line = self.current_line
+        process_block_lines.append(process_line)
         self.advance()
         while self.current_line != None:
             if not self.is_child(process_line, self.current_line):
@@ -132,15 +133,18 @@ class Statement_filter:
 class Process_filter:
     def __init__(self, lines):
         self.lines = lines 
-        self.process_regex_exp = "\s*def .+/((.+)/):$"
-        self.sensitivity_list = []
+        self.process_regex_exp = "\s*def .+\((.+)\):"
+        self.sensitivity_list = ""
+        self.tokens = []
+        self.tokenize()
    
     def tokenize(self):
-        self.sensitivity_list = re.match(self.process_regex_exp, self.lines[0]).group(1).split(',')
+        process_match = re.match(self.process_regex_exp, self.lines[0])
+        self.sensitivity_list = process_match.group(1)
         self.tokens = Capture(self.lines[1:]).get_tokens()
     
     def parse(self):
-        parsed_block = f"process ({','.join(self.sensitivity_list)})\n"
+        parsed_block = f"process ({self.sensitivity_list})\n"
         for token in self.tokens:
             parsed_block += token.parse() + "\n"
         parsed_block += "end process;\n"

@@ -1,6 +1,6 @@
 from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal, Architecture
 from PythonToVhdlConverter.to_vhdl import convert_to_vhdl
-from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic
+from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
 import time
 
 class Mux():
@@ -24,12 +24,21 @@ def logic():
     if mario == 1 :
         mario = 1 % 10
         x = 4
+    elif mario == 2 :
+        m = 1 << 2
     else :
         mario = 0
         x = 3
         
     for i in range(1, 10):
         i = 1
+        
+    @process
+    def process(x, y):
+        if mario / 2 <= 2 :
+            x = 0
+        else :
+            y = 0
         
 entity = Entity(Mux())
 arch = Architecture(Arch())
