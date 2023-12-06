@@ -18,7 +18,15 @@ def logic(func):
     return 0
 
 def get_lines(file_path):
-
+    """
+    Reads file and returns lines.
+ 
+    Args:
+        file_path(str): path to the file to read from.
+ 
+    Returns:
+        list(str): lines
+    """
     with open(file_path, 'r') as f1:
         lines = f1.readlines()
     return lines
@@ -28,13 +36,22 @@ def save_output(lines):
         file.writelines(lines)
         
 def find_leading_white_space(line):
+    """
+    Calculates number of leading white space.
+ 
+    Args:
+        line(str): The line.
+ 
+    Returns:
+        int: The number of leading white space.
+    """
     return len(line) - len(line.lstrip())
 
 
 def parse_file(file_path):
     lines = get_lines(file_path)
         
-    logic_index = lines.index("@logic\n")
+    logic_index = lines.index("@+\n")
     lines = lines[logic_index+2:]
     
     parsed_text = []

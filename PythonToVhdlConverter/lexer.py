@@ -45,7 +45,25 @@ def register_tokens(*tokens):
 
 
 class Token:
+    """
+    A class representing a token.
+ 
+    Attributes:
+        token_name(str): The token typed.
+        replace_with(str): The token to replace with.
+        type(str): The type of token (arithmetic, logical, bitwise, etc..).
+        in_middle(bool): ...
+    """
     def __init__(self, token_name, replace_with, type, in_middle=True):
+        """
+        Initializes a Token object.
+ 
+        Parameters:
+            token_name(str): The token typed.
+            replace_with(str): The token to replace with.
+            type(str): The type of token (arithmetic, logical, bitwise, etc..).
+            in_middle (bool): ...
+        """
         self.name = token_name
         self.replace_with = replace_with
         self.type = type
@@ -57,19 +75,50 @@ class Token:
 
 
 class Lexer:
+    """
+    A class representing a lexical analyzer which is reponsible for the conversion of a text into meaningful tokens belonging to categories.
+ 
+    Attributes:
+        text(str): The text to convert into tokens.
+    """
     def __init__(self, text):
-        self.text = text.lstrip()
-        self.pos = -1
+        """
+        Initializes a Lexer object.
+ 
+        Parameters:
+            text(str): The text to convert into tokens.
+        """
+        self.text = text.lstrip()   # remove leading white space
+        self.pos = -1   #position of current char
         self.current_char = None
         self.advance()
     def advance(self):
+        """
+        Advances to the next character in text.
+ 
+        Args:
+            self
+ 
+        Returns:
+            void
+        """
         self.pos += 1
         self.current_char = self.text[self.pos] if self.pos < len(self.text) else None
         
     def make_tokens(self):
+        """
+        Tokenizes text by calling appropriate functions (make_number() and make_string())
+ 
+        Args:
+            self
+ 
+        Returns:
+            list(str): List of tokens.
+        """
         tokens = []
         
-        while self.current_char != None:
+        
+        while self.current_char != None: # checks if current character is a tab, digit or else (literals or symbols).
             if self.current_char in ' \t':
                 self.advance()
             elif self.current_char in digits:
@@ -80,12 +129,22 @@ class Lexer:
         return tokens
                 
     def make_number(self):
+        """
+        Tokenizes a number.
+ 
+        Args:
+            self
+ 
+        Returns:
+            str: The number as a string.
+        """
         num_str = ""
         dot_count = 0
         
-        while self.current_char != None and self.current_char in digits + '.':
+        
+        while self.current_char != None and self.current_char in digits + '.': # Checks if the current character is not None and is a digit or a dot.
             if self.current_char == '.':
-                if dot_count == 1:break
+                if dot_count == 1:break # ensures no more than one decimal place.
                 dot_count += 1
                 num_str += '.'
             else:
