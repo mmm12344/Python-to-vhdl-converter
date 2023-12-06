@@ -1,4 +1,5 @@
 from .lexer import parse_text
+from .filters import Capture
 
 
 
@@ -16,6 +17,8 @@ sla = Infix()
 
 def logic(func):
     return 0
+def process(func):
+    return 0
 
 def get_lines(file_path):
 
@@ -31,22 +34,34 @@ def find_leading_white_space(line):
     return len(line) - len(line.lstrip())
 
 
+def process_lines(lines):
+    processed_lines = []
+    for line in lines:
+        processed_lines.append(line.rstrip())
+    return processed_lines
+
+def get_logic(lines):
+    logic_lines = []
+    logic_index = lines.index("@logic\n")
+    lines = process_lines(lines[logic_index+2:])
+    for line in lines:
+        if find_leading_white_space(line) < 2 and line.rstrip() != "":
+            break
+        if line.rstrip() != "":
+            logic_lines.append(line)
+    return logic_lines
+
+
 def parse_file(file_path):
     lines = get_lines(file_path)
         
-    logic_index = lines.index("@logic\n")
-    lines = lines[logic_index+2:]
+    lines = get_logic(lines)
+    lines = process_lines(lines)
     
-    parsed_text = []
-    for line in lines:
-        print(line)
-        if find_leading_white_space(line) < 2:
-            break
-        parsed_text.append(parse_text(line.strip()))
+    parsed_text = Capture(lines).parse()
         
-    print(parsed_text)
         
-    return "\n".join(parsed_text)
+    return parsed_text
         
         
             

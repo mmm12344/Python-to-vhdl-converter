@@ -58,7 +58,7 @@ class Token:
 
 class Lexer:
     def __init__(self, text):
-        self.text = text.lstrip()
+        self.text = text
         self.pos = -1
         self.current_char = None
         self.advance()
@@ -106,7 +106,7 @@ class Lexer:
         elif re.match(variable_regex_exp, string):
             return string
         else:
-            raise Exception(f"Illegal string ({string})")
+            raise Exception(f"Illegal string [ {string} ] in line [ {self.text} ] position [ {self.pos} ]")
         
     def get_token_by_name(self, name):
         if name in arithmatic_operators:
