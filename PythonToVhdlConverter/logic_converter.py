@@ -21,7 +21,15 @@ def process(func):
     return 0
 
 def get_lines(file_path):
-
+    """
+    Reads file and returns lines.
+ 
+    Args:
+        file_path(str): path to the file to read from.
+ 
+    Returns:
+        list(str): lines
+    """
     with open(file_path, 'r') as f1:
         lines = f1.readlines()
     return lines
@@ -31,6 +39,15 @@ def save_output(lines):
         file.writelines(lines)
         
 def find_leading_white_space(line):
+    """
+    Calculates number of leading white space.
+ 
+    Args:
+        line(str): The line.
+ 
+    Returns:
+        int: The number of leading white space.
+    """
     return len(line) - len(line.lstrip())
 
 
