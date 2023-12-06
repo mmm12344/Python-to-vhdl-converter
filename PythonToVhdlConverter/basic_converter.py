@@ -47,7 +47,7 @@ class Output():
     def __str__(self):
         return f"{self.name} : out {self.type}"
 
-class Signals():
+class Signal():
     def __init__(self, name, type):
         self.name = name
         self.type = type

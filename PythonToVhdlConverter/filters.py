@@ -215,7 +215,7 @@ class For_loop_filter:
                 token = For_loop_token(for_match.group(1), for_match.group(2), for_match.group(3))
                 self.tokens.append(token)
             else:
-                token[-1].add_statement(Statement_filter(line))
+                self.tokens[-1].add_statement(Statement_filter(line))
 
     def parse(self):
         parsed_block = ""
