@@ -30,6 +30,15 @@ def logic():
     
     mario = 30 ** 4 % 15 |sra| 40
     
+    if mario == 1 :
+        mario = 1 % 10
+        x = 4
+    else :
+        mario = 0
+        x = 3
+    
+    
+    
     
 entity = Entity(Mux())
 arch = Architecture(Arch())

@@ -165,7 +165,7 @@ class Lexer:
         elif re.match(variable_regex_exp, string):
             return string
         else:
-            raise Exception(f"Illegal string ({string})")
+            raise Exception(f"Illegal string [ {string} ] in line [ {self.text} ] position [ {self.pos} ]")
         
     def get_token_by_name(self, name):
         if name in arithmatic_operators:
