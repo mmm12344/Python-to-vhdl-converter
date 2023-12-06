@@ -124,7 +124,7 @@ class For_loop_filter:
     def parse(self):
         parsed_block = ""
         for token in self.tokens:
-            parsed_block += f"for {token.parameter} in {token.from_var} to {token.to_var} loop\n"
+            parsed_block += f"for {parse_text(token.parameter)} in {parse_text(token.from_var)} to {parse_text(token.to_var)} loop\n"
             for statement in token.statements:
                 parsed_block += f"{statement.parse()}\n"
         
