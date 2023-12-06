@@ -27,8 +27,81 @@ class For_loop_token:
     
     def add_statement(self, statement):
         self.statements.append(statement)
+        
+        
+        
 
-
+class Capture:
+    def __init__(self, lines):
+        self.lines = lines
+        self.pos = -1
+        self.current_line = None
+        self.tokens = []
+        self.advance()
+        self.tokenize()
+        
+    def tokenize(self):
+        while self.current_line != None:
+            if If_condition_filter.is_if(self.current_line):
+                self.tokens.append(If_condition_filter(self.capture_if()))
+            elif For_loop_filter.is_for(self.current_line):
+                self.tokens.append(For_loop_filter(self.capture_for()))
+            else:
+                self.tokens.append(Statement_filter(self.current_line))
+                self.advance()
+        
+    def advance(self):
+        self.pos += 1
+        self.current_line = self.lines[self.pos] if self.pos < len(self.lines) else None
+    
+    def get_leading_white_sapces(self, line):
+        return len(line) - len(line.lstrip())
+    
+    def is_child(self, parent_line, child_line):
+        if self.get_leading_white_sapces(parent_line) > self.get_leading_white_sapces(child_line):
+            return True
+        return False
+    
+    def capture_if(self):
+        else_regex_exp = "^else (.+):$"
+        if_block_lines = []
+        found_else = False
+        else_line = ""
+        
+        while self.current_line != None:
+            
+            if found_else and not self.is_child(else_line, self.current_line):
+                break
+            
+            if_block_lines.append(self.current_line)
+            
+            if re.match(else_regex_exp, self.current_line):
+                found_else = True
+                else_line = self.current_line
+            
+            self.advance()
+        return if_block_lines
+    
+    def capture_for(self):
+        
+        for_block_lines = []     
+        for_block_lines.append(self.current_line)
+        for_line = self.current_line
+        self.advance()
+        
+        while self.current_line != None:
+            if not self.is_child(for_line, self.current_line):
+                break
+            for_block_lines.append(self.current_line)
+            self.advance()
+        
+        return for_block_lines
+    
+    def get_tokens(self):
+        return self.tokens
+                
+            
+    
 
 class Statement_filter:
     def __init__(self, line):
@@ -51,12 +124,14 @@ class Process_filter:
         self.current_line = self.lines[self.pos] if self.pos < len(self.lines) else None
         
     def tokenize(self):
-        while self.current_line != None:
-            if not If_condition_filter.is_if(self.current_line):
-                self.tokens.append(Statement_filter(self.current_line))
-                self.advance()
-            else:
-                self.capture_if()
+        self.tokens = Capture(self.lines).get_tokens()
+    
+    def parse(self):
+        parsed_block = ""
+        for token in self.tokens:
+            parsed_block += token.parse() + "\n"
+        return parsed_block
+    
         
 
 class If_condition_filter:
@@ -99,7 +174,7 @@ class If_condition_filter:
         return parsed_block
     
     def is_if(self, line):
-        if re.match(self.if_regex_exp, line) or re.match(self.elif_regex_exp, line) or re.match(self.else_regex_exp, line):
+        if re.match(self.if_regex_exp, line):
             return True
         return False
     
@@ -131,4 +206,7 @@ class For_loop_filter:
         parsed_block += "end loop;\n"
         return parsed_block
                 
-                
+    def is_for(self, line):
+        if re.match(self.for_regex_exp, line):
+            return True
+        return False
