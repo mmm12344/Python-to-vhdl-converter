@@ -199,7 +199,7 @@ class If_condition_filter:
                 parsed_block += f"else\n"
                 
             for statement in token.statements:
-                parsed_block += f"{statement.parse()}\n"
+                parsed_block += f"{statement.parse()}"
         
         parsed_block += "end if;\n"
         return style(parsed_block)
@@ -233,7 +233,7 @@ class For_loop_filter:
         for token in self.tokens:
             parsed_block += f"for {parse_text(token.parameter)} in {parse_text(token.from_var)} to {parse_text(token.to_var)} loop\n"
             for statement in token.statements:
-                parsed_block += f"{statement.parse()}\n"
+                parsed_block += f"{statement.parse()}"
         
         parsed_block += "end loop;\n"
         return style(parsed_block)
