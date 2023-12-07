@@ -1,7 +1,10 @@
 from .validation import validate_data_types
 from .logic_converter import parse_file
 
-
+def style(block):
+    styled = [""]
+    styled[1:] = block.splitlines(True)
+    return "\t".join(styled)
 
 class Entity():
     """
@@ -47,7 +50,7 @@ class Entity():
         for output in self.entity_class.outputs:
             port += "\n" + output.__str__() + ";"
         port = port[:-1] # to avoid writing ';);'
-        return port
+        return style(port)
         
         
 class Architecture():
@@ -89,7 +92,7 @@ class Architecture():
         signals = ""
         for signal in self.architecture_class.signals:
             signals += signal.__str__() + ";\n"
-        return signals
+        return style(signals)
             
 
 class Input():

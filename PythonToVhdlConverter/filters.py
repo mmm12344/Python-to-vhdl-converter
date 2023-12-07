@@ -7,6 +7,13 @@ if_type = "if"
 elif_type = "elif"
 else_type = "else"
 
+
+def style(block):
+    styled = [""]
+    styled[1:] = block.splitlines(True)
+    return "\t".join(styled)
+
+
 class Condition_token:
     def __init__(self, type, condition=None):
         self.condition = condition
@@ -119,7 +126,7 @@ class Capture:
         parsed_block = ""
         for token in self.tokens:
             parsed_block += token.parse()
-        return parsed_block
+        return style(parsed_block)
                 
             
     
@@ -128,7 +135,7 @@ class Statement_filter:
     def __init__(self, line):
         self.line = line
     def parse(self):
-        return parse_text(self.line) +" ;\n"
+        return style(parse_text(self.line) +" ;\n")
 
 class Process_filter:
     def __init__(self, lines):
@@ -148,7 +155,7 @@ class Process_filter:
         for token in self.tokens:
             parsed_block += token.parse() + "\n"
         parsed_block += "end process;\n"
-        return parsed_block
+        return style(parsed_block)
     
     def is_process(line):
         process_decorator_regex_exp = "\s*@process$"
@@ -195,7 +202,7 @@ class If_condition_filter:
                 parsed_block += f"{statement.parse()}\n"
         
         parsed_block += "end if;\n"
-        return parsed_block
+        return style(parsed_block)
     
     def is_if(line):
         if_regex_exp = "\s*if (.+):$"
@@ -229,7 +236,7 @@ class For_loop_filter:
                 parsed_block += f"{statement.parse()}\n"
         
         parsed_block += "end loop;\n"
-        return parsed_block
+        return style(parsed_block)
                 
     def is_for(line):
         for_regex_exp = "\s*for (.+) in range\((.+),(.+)\):"
