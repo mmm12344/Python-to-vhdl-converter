@@ -106,8 +106,13 @@ class Capture:
 
     def capture_match_case(self):
         match_case_block_lines = []
+        match_case_block_lines.append(self.current_line)
+        match_line = self.current_line
+        self.advance()
 
         while self.current_line != None:
+            if not self.is_child(match_line, self.current_line):
+                break
             match_case_block_lines.append(self.current_line)
             self.advance()
         

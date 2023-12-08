@@ -33,6 +33,11 @@ def logic():
     for i in range(1, 10):
         i = 1
 
+    match i:
+        case 3:
+            mario = 3
+        case 4:
+            i = 5
         
     @process
     def process(x, y):
@@ -41,11 +46,13 @@ def logic():
         else :
             y = 0
 
-        match i:
+        match mario:
             case 3:
-                mario = 3
+                i = 3
             case 4:
-                i = 5
+                mario = 5
+            
+
         
         
 entity = Entity(Mux())

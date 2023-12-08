@@ -25,6 +25,12 @@ begin
 		for i in 1 to 10 loop
 			i <= 1 ;
 		end loop;
+		case i is
+		when 3 =>
+			mario <= 3 ;
+		when 4 =>
+			i <= 5 ;
+		end case;
 		process (x, y)
 			if mario / 2 <= 2 then
 				x <= 0 ;
@@ -32,11 +38,11 @@ begin
 				y <= 0 ;
 			end if;
 		
-			case i is
+			case mario is
 			when 3 =>
-				mario <= 3 ;
+				i <= 3 ;
 			when 4 =>
-				i <= 5 ;
+				mario <= 5 ;
 			end case;
 		
 		end process;
