@@ -37,6 +37,8 @@ def logic():
     def process(x, y):
         if mario / 2 <= 2 :
             x = 0
+        elif mario * 2 > 2 :
+            x = 2
         else :
             y = 0
         

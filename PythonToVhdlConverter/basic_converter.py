@@ -78,7 +78,7 @@ class Architecture():
         Returns:
             str: The VHDL code for an architecture with signals.
         """
-        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{self.create_signals()}\nbegin\n{parse_file(self.architecture_class.path)}\nend;"
+        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{self.create_signals()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend;"
     def create_signals(self):
         """
         Creates VHDL signals.

@@ -9,37 +9,31 @@ architecture behavior of Mux is
 	signal D : std_logic;
 	signal E : std_logic;
 
-begin
+	begin
 		a <= b + a ;
 		b <= b sll 1 ;
 		mario <= 30 ** 4 mod 15 sra 40 ;
 		if mario = 1 then
 			mario <= 1 mod 10 ;
-		
 			x <= 4 ;
-		
 		if mario = 2 then
 			m <= 1 sll 2 ;
-		
 		else
 			mario <= 0 ;
-		
 			x <= 3 ;
-		
 		end if;
 		for i in 1 to 10 loop
 			i <= 1 ;
-		
 		end loop;
 		process (x, y)
 			if mario / 2 <= 2 then
 				x <= 0 ;
-			
+			if mario * 2 > 2 then
+				x <= 2 ;
 			else
 				y <= 0 ;
-			
 			end if;
 		
 		end process;
 
-end;
+	end;
