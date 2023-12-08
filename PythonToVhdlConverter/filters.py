@@ -268,10 +268,10 @@ class Match_Case_Condition_Filter:
             if token.type == "match":
                 parsed_block += f"case {parse_text(token.parameter)} is\n"
             elif token.type == "case":
-                parsed_block += f"when {parse_text(token.choice)} =>\n"
+                parsed_block += style(f"when {parse_text(token.choice)} =>\n")
             
             for statement in token.statements:
-                parsed_block += f"{statement.parse()}"
+                parsed_block += style(f"{statement.parse()}")
 
 
         parsed_block += "end case;\n"
