@@ -31,6 +31,9 @@ begin
 			when 4 =>
 				i <= 5 ;
 		end case;
+		while i < 5 loop
+			mario <= 3 ;
+		end loop;
 		process (x, y)
 			if mario / 2 <= 2 then
 				x <= 0 ;
@@ -44,6 +47,10 @@ begin
 				when 4 =>
 					mario <= 5 ;
 			end case;
+		
+			while mario < 5 loop
+				i <= 4 ;
+			end loop;
 		
 		end process;
 

@@ -38,6 +38,9 @@ def logic():
             mario = 3
         case 4:
             i = 5
+
+    while i < 5:
+        mario = 3
         
     @process
     def process(x, y):
@@ -51,6 +54,9 @@ def logic():
                 i = 3
             case 4:
                 mario = 5
+
+        while mario < 5:
+            i = 4
             
 
         

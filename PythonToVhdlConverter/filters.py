@@ -45,6 +45,14 @@ class For_loop_token:
     
     def add_statement(self, statement):
         self.statements.append(statement)
+
+class While_loop_token:
+    def __init__(self, condition):
+        self.condition = condition
+        self.statements = []
+    
+    def add_statement(self, statement):
+        self.statements.append(statement)
         
         
         
@@ -66,6 +74,8 @@ class Capture:
                 self.tokens.append(Match_Case_Condition_Filter(self.capture_match_case()))
             elif For_loop_filter.is_for(self.current_line):
                 self.tokens.append(For_loop_filter(self.capture_for()))
+            elif While_loop_filter.is_while(self.current_line):
+                self.tokens.append(While_loop_filter(self.capture_while()))
             elif Process_filter.is_process(self.current_line):
                 self.advance()
                 self.tokens.append(Process_filter(self.capture_process()))
@@ -132,6 +142,21 @@ class Capture:
             self.advance()
         
         return for_block_lines
+    
+    def capture_while(self):
+        
+        while_block_lines = []     
+        while_block_lines.append(self.current_line)
+        while_line = self.current_line
+        self.advance()
+        
+        while self.current_line != None:
+            if not self.is_child(while_line, self.current_line):
+                break
+            while_block_lines.append(self.current_line)
+            self.advance()
+        
+        return while_block_lines
     
     def capture_process(self):
         process_block_lines = []
@@ -313,5 +338,37 @@ class For_loop_filter:
     def is_for(line):
         for_regex_exp = "\s*for (.+) in range\((.+),(.+)\):"
         if re.match(for_regex_exp, line):
+            return True
+        return False
+    
+class While_loop_filter:
+    def __init__(self, lines):
+        self.lines = lines
+        self.while_regex_exp = "\s*while (.+):"
+        self.tokens = []
+        self.tokenize()
+    
+    def tokenize(self):
+        for line in self.lines:
+            while_match = re.match(self.while_regex_exp, line)
+            if while_match:
+                token = While_loop_token(while_match.group(1))
+                self.tokens.append(token)
+            else:
+                self.tokens[-1].add_statement(Statement_filter(line))
+
+    def parse(self):
+        parsed_block = ""
+        for token in self.tokens:
+            parsed_block += f"while {parse_text(token.condition)} loop\n"
+            for statement in token.statements:
+                parsed_block += f"{statement.parse()}"
+        
+        parsed_block += "end loop;\n"
+        return style(parsed_block)
+                
+    def is_while(line):
+        while_regex_exp = "\s*while (.+):"
+        if re.match(while_regex_exp, line):
             return True
         return False
