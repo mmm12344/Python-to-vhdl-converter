@@ -5,5 +5,5 @@ def convert_to_vhdl(entity, arch):
 
 
 def save_to_file(entity, architecture):
-    with open("result.txt", "w") as f:
+    with open("result.vhdl", "w") as f:
         f.writelines(convert_to_vhdl(entity, architecture))

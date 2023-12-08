@@ -33,7 +33,7 @@ class Entity():
         Returns:
             str: VHDL code for an entity.
         """
-        return f"entity {self.entity_class.name} is\nport(\n{self.create_port()}\n)\nend {self.entity_class.name}"
+        return f"entity {self.entity_class.name} is\nport(\n{self.create_port()}\n);\nend {self.entity_class.name}"
     def create_port(self):
         """
         Creates VHDL port.

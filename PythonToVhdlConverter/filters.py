@@ -245,8 +245,10 @@ class If_condition_filter:
     def parse(self):
         parsed_block = ""
         for token in self.tokens:
-            if token.type == if_type or token.type == elif_type:
+            if token.type == if_type:
                 parsed_block += f"if {parse_text(token.condition)} then\n"
+            elif token.type == elif_type:
+                parsed_block += f"elsif {parse_text(token.condition)} then\n"
             elif token.type == else_type:
                 parsed_block += f"else\n"
                 

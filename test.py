@@ -19,6 +19,8 @@ def logic():
     a = b + a
     b = b << 1
     
+    b = 0 |sla| 2
+    
     mario = 30 ** 4 % 15 |sra| 40
     
     if mario == 1 :
