@@ -24,15 +24,26 @@ architecture behavior of Mux is
 		end if;
 		for i in 1 to 10 loop
 			i <= 1 ;
+		
 		end loop;
 		process (x, y)
 			if mario / 2 <= 2 then
 				x <= 0 ;
-			if mario * 2 > 2 then
-				x <= 2 ;
+			
 			else
 				y <= 0 ;
 			end if;
+		
+			case mario is
+				when 3 =>
+					i <= 3 ;
+				when 4 =>
+					mario <= 5 ;
+			end case;
+		
+			while mario < 5 loop
+				i <= 4 ;
+			end loop;
 		
 		end process;
 
