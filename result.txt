@@ -15,30 +15,42 @@ begin
 		mario <= 30 ** 4 mod 15 sra 40 ;
 		if mario = 1 then
 			mario <= 1 mod 10 ;
-		
 			x <= 4 ;
-		
 		if mario = 2 then
 			m <= 1 sll 2 ;
-		
 		else
 			mario <= 0 ;
-		
 			x <= 3 ;
-		
 		end if;
 		for i in 1 to 10 loop
 			i <= 1 ;
-		
+		end loop;
+		case i is
+			when 3 =>
+				mario <= 3 ;
+			when 4 =>
+				i <= 5 ;
+		end case;
+		while i < 5 loop
+			mario <= 3 ;
 		end loop;
 		process (x, y)
 			if mario / 2 <= 2 then
 				x <= 0 ;
-			
 			else
 				y <= 0 ;
-			
 			end if;
+		
+			case mario is
+				when 3 =>
+					i <= 3 ;
+				when 4 =>
+					mario <= 5 ;
+			end case;
+		
+			while mario < 5 loop
+				i <= 4 ;
+			end loop;
 		
 		end process;
 
