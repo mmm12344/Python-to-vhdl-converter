@@ -32,6 +32,7 @@ def logic():
         
     for i in range(1, 10):
         i = 1
+
         
     @process
     def process(x, y):
@@ -39,6 +40,13 @@ def logic():
             x = 0
         else :
             y = 0
+
+        match i:
+            case 3:
+                mario = 3
+            case 4:
+                i = 5
+        
         
 entity = Entity(Mux())
 arch = Architecture(Arch())
