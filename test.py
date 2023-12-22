@@ -11,7 +11,7 @@ class Mux():
       
 class Arch():
     path = __file__
-    signals = [Signal("D", Std_logic()), Signal("E", Std_logic())]
+    signals = [Signal("D", Std_logic_vector(3)), Signal("E", Std_logic())]
     name = "behavior"
     entity_name = "Mux"
                

@@ -16,6 +16,6 @@ class Std_logic_vector:
         self.allowed_values = ['U', 'X', '0', '1', 'Z', 'W', 'L', 'H', '-']
         self.num_of_bits = num_of_bits
     def __repr__(self):
-        return f'std_logic_vector({self.num_of_bits} downto 0)'
+        return f'std_logic_vector({self.num_of_bits-1} downto 0)'
     
     

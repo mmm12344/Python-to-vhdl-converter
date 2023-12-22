@@ -6,7 +6,7 @@ port(
 );
 end Mux
 architecture behavior of Mux is
-	signal D : std_logic;
+	signal D : std_logic_vector(3 downto 0);
 	signal E : std_logic;
 
 	begin
