@@ -34,9 +34,6 @@ def get_lines(file_path):
         lines = f1.readlines()
     return lines
             
-def save_output(lines):
-    with open("logic_out.txt", 'w') as file:
-        file.writelines(lines)
         
 def find_leading_white_space(line):
     """

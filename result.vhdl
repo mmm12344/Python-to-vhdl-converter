@@ -6,13 +6,13 @@ port(
 );
 end Mux
 architecture behavior of Mux is
-	signal D : std_logic_vector(3 downto 0);
+	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
 
 	begin
 		a <= b + a ;
-		b <= b sll 1 ;
-		a ( 0 ) <= 1 ;
+		b <= b sll 1 srl 2 ;
+		a ( 0 ) <= " 1 " ;
 		mario <= 30 ** 4 mod 15 sra 40 ;
 		for i in 1 to 10 loop
 			i <= 1 ;
