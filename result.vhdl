@@ -12,17 +12,8 @@ architecture behavior of Mux is
 	begin
 		a <= b + a ;
 		b <= b sll 1 ;
-		b <= 0 sla 2 ;
+		a ( 0 ) <= 1 ;
 		mario <= 30 ** 4 mod 15 sra 40 ;
-		if mario = 1 then
-			mario <= 1 mod 10 ;
-			x <= 4 ;
-		elsif mario = 2 then
-			m <= 1 sll 2 ;
-		else
-			mario <= 0 ;
-			x <= 3 ;
-		end if;
 		for i in 1 to 10 loop
 			i <= 1 ;
 		end loop;
@@ -54,6 +45,8 @@ architecture behavior of Mux is
 			while mario < 5 loop
 				i <= 4 ;
 			end loop;
+		
+			mario <= 5 * 20 xnor 1 ;
 		
 		end process;
 

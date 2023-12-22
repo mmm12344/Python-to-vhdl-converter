@@ -39,3 +39,9 @@ greaterthanorequal_tok = Token(">=", ">=", "rel")
 ## assignment tok
 
 ass_tok = Token("=", "<=", "assignment")
+
+
+## list brackets tokens
+
+left_bracket_tok = Token("[", "(", "list_brackets")
+right_bracket_tok = Token("]", ")", "list_brackets")

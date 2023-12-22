@@ -101,7 +101,7 @@ class Input():
         self.type = type
         validate_data_types(type)
     def __str__(self):
-        return f"{self.name} : in {self.type}"
+        return f"{self.name} : in {self.type.__repr__()}"
     
 class Output():
     def __init__(self, name, type):
@@ -109,7 +109,7 @@ class Output():
         self.type = type
         validate_data_types(type)
     def __str__(self):
-        return f"{self.name} : out {self.type}"
+        return f"{self.name} : out {self.type.__repr__()}"
 
 class Signal():
     def __init__(self, name, type):
@@ -117,4 +117,4 @@ class Signal():
         self.type = type
         validate_data_types(type)
     def __str__(self):
-        return f"signal {self.name} : {self.type}"
+        return f"signal {self.name} : {self.type.__repr__()}"

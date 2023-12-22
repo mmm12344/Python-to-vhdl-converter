@@ -1,16 +1,17 @@
 from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal, Architecture
+from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector
 from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
 import time
 
 class Mux():
     name = "Mux"
-    inputs = [Input("A", "std_logic")]
-    outputs = [Output("B", "std_logic")]
+    inputs = [Input("A", Std_logic())]
+    outputs = [Output("B", Std_logic())]
       
 class Arch():
     path = __file__
-    signals = [Signal("D", "std_logic"), Signal("E", "std_logic")]
+    signals = [Signal("D", Std_logic()), Signal("E", Std_logic())]
     name = "behavior"
     entity_name = "Mux"
                
@@ -19,18 +20,11 @@ def logic():
     a = b + a
     b = b << 1
     
-    b = 0 |sla| 2
+    a[0] = 1
     
+  
+
     mario = 30 ** 4 % 15 |sra| 40
-    
-    if mario == 1 :
-        mario = 1 % 10
-        x = 4
-    elif mario == 2 :
-        m = 1 << 2
-    else :
-        mario = 0
-        x = 3
         
     for i in range(1, 10):
         i = 1
@@ -61,6 +55,8 @@ def logic():
 
         while mario < 5:
             i = 4
+            
+        mario = 5 * 20 |xnor| 1
             
 
         

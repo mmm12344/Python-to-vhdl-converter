@@ -1,7 +1,16 @@
+from .data_types import Bit, Std_logic, Std_logic_vector
 
-data_types = ["std_logic", "bit"]
 
 
-def validate_data_types(type):
-    if(type not in data_types):
-        raise Exception("Not supported Data type")
+data_types = [Bit, Std_logic, Std_logic_vector]
+
+
+
+
+
+
+def validate_data_types(data_type):
+    for item in data_types:
+        if(type(data_type) == item):
+            return True
+    raise Exception(f"type:  {data_type.__repr__()} is not supported")

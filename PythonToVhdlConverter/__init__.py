@@ -31,7 +31,10 @@ register_tokens(
     lessthanorequalto_tok,
     greaterthanorequal_tok,
     
-    ass_tok
+    ass_tok,
+    
+    right_bracket_tok,
+    left_bracket_tok,
 )
 
 

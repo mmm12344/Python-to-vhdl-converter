@@ -2,6 +2,7 @@ import re
 
 digits = "0123456789"
 literals = "thequickbrownfoxjumpsoverthelazydog"
+break_string_symbols = "[]"
 symbols = "_|<>-+*/%|^<>=!"
 variable_regex_exp = "^([A-Z]|[a-z])+([0-9])*$"
 
@@ -11,12 +12,16 @@ logical_tokens = []
 bitwise_tokens = []
 assignment_tokens = []
 relational_tokens = []
+list_bracket_tokens = []
 
 arithmatic_operators = []
 logical_operators = []
 bitwise_operators = []
 assignment_operators = []
 relational_operators = []
+list_bracket_operators = []
+
+
 
 def register_token(token, type):
     if type == "arith":
@@ -34,6 +39,9 @@ def register_token(token, type):
     elif type == "rel":
         relational_operators.append(token.name)
         relational_tokens.append(token)
+    elif type == "list_brackets":
+        list_bracket_operators.append(token.name)
+        list_bracket_tokens.append(token)
     else:
         raise Exception(f"type not supported ({type})")
         
@@ -123,8 +131,9 @@ class Lexer:
                 self.advance()
             elif self.current_char in digits:
                 tokens.append(self.make_number())
-            else:
+            else :
                 tokens.append(self.make_string())
+           
                 
         return tokens
                 
@@ -156,11 +165,15 @@ class Lexer:
     def make_string(self):
         string = ''
         
-        while self.current_char != None and (self.current_char in literals or self.current_char in symbols):
-            string += self.current_char
-            self.advance()
-        
-        if string in arithmatic_operators or string in logical_operators or string in bitwise_operators or string in assignment_operators or string in relational_operators:
+        if self.current_char in break_string_symbols:
+            while self.current_char != None and (self.current_char in break_string_symbols):
+                string += self.current_char
+                self.advance()
+        else:
+            while self.current_char != None and (self.current_char in literals or self.current_char in symbols):
+                string += self.current_char
+                self.advance()
+        if string in arithmatic_operators or string in logical_operators or string in bitwise_operators or string in assignment_operators or string in relational_operators or string in list_bracket_operators:
             return self.get_token_by_name(string)
         elif re.match(variable_regex_exp, string):
             return string
@@ -178,6 +191,9 @@ class Lexer:
             return assignment_tokens[assignment_operators.index(name)]
         if name in relational_operators:
             return relational_tokens[relational_operators.index(name)]
+        if name in list_bracket_operators:
+            return list_bracket_tokens[list_bracket_operators.index(name)]
+        
 
 
 
