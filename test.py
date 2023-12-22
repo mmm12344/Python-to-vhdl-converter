@@ -18,11 +18,10 @@ class Arch():
 @logic
 def logic():
     a = b + a
-    b = b << 1
+    b = b << 1 >> 2
     
-    a[0] = 1
+    a[0] = "1"
     
-  
 
     mario = 30 ** 4 % 15 |sra| 40
         
@@ -60,8 +59,6 @@ def logic():
             
 
         
-        
-entity = Entity(Mux())
-arch = Architecture(Arch())
 
-save_to_file(entity, arch)
+
+save_to_file(Entity(Mux()), Architecture(Arch))

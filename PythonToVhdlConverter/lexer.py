@@ -3,7 +3,8 @@ import re
 digits = "0123456789"
 literals = "thequickbrownfoxjumpsoverthelazydog"
 break_string_symbols = "[]"
-symbols = "_|<>-+*/%|^<>=!"
+symbols = """'"_|<>-+*/%|^<>=!"""
+quotations = """'"'"""
 variable_regex_exp = "^([A-Z]|[a-z])+([0-9])*$"
 
 
@@ -175,7 +176,7 @@ class Lexer:
                 self.advance()
         if string in arithmatic_operators or string in logical_operators or string in bitwise_operators or string in assignment_operators or string in relational_operators or string in list_bracket_operators:
             return self.get_token_by_name(string)
-        elif re.match(variable_regex_exp, string):
+        elif re.match(variable_regex_exp, string) or string in quotations:
             return string
         else:
             raise Exception(f"Illegal string [ {string} ] in line [ {self.text} ] position [ {self.pos} ]")

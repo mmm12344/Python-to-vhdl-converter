@@ -1,7 +1,9 @@
 from . import basic_converter, logic_converter, validation, to_vhdl
 from .tokens import *
 from .lexer import register_tokens
+from .to_json import init_json
 
+init_json()
 
 register_tokens(
     and_tok,
