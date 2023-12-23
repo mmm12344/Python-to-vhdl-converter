@@ -2,54 +2,21 @@ import re
 
 digits = "0123456789"
 literals = "thequickbrownfoxjumpsoverthelazydog"
-break_string_symbols = "[]"
-symbols = """'"_|<>-+*/%|^<>=!"""
-quotations = """'"'"""
+break_string_symbols = """['"]<>-+*/%^<>=!"""
+symbols = """'"_<>-+*/%^<>=!|"""
+
 variable_regex_exp = "^([A-Z]|[a-z])+([0-9])*$"
 
 
-arithmatic_tokens = []
-logical_tokens = []
-bitwise_tokens = []
-assignment_tokens = []
-relational_tokens = []
-list_bracket_tokens = []
+tokens = []
 
-arithmatic_operators = []
-logical_operators = []
-bitwise_operators = []
-assignment_operators = []
-relational_operators = []
-list_bracket_operators = []
-
-
-
-def register_token(token, type):
-    if type == "arith":
-        arithmatic_operators.append(token.name)
-        arithmatic_tokens.append(token)
-    elif type == "logic":
-        logical_operators.append(token.name)
-        logical_tokens.append(token)
-    elif type == "bitwise":
-        bitwise_operators.append(token.name)
-        bitwise_tokens.append(token)
-    elif type == "assignment":
-        assignment_operators.append(token.name)
-        assignment_tokens.append(token)
-    elif type == "rel":
-        relational_operators.append(token.name)
-        relational_tokens.append(token)
-    elif type == "list_brackets":
-        list_bracket_operators.append(token.name)
-        list_bracket_tokens.append(token)
-    else:
-        raise Exception(f"type not supported ({type})")
+def register_token(token):
+    tokens.append(token)
         
 
 def register_tokens(*tokens):
     for token in tokens:
-        register_token(token, token.type)
+        register_token(token)
         
 
 
@@ -63,7 +30,7 @@ class Token:
         type(str): The type of token (arithmetic, logical, bitwise, etc..).
         in_middle(bool): ...
     """
-    def __init__(self, token_name, replace_with, type, in_middle=True):
+    def __init__(self, token_name, replace_with, type=None, in_middle=True):
         """
         Initializes a Token object.
  
@@ -171,29 +138,24 @@ class Lexer:
                 string += self.current_char
                 self.advance()
         else:
-            while self.current_char != None and (self.current_char in literals or self.current_char in symbols):
+            while self.current_char != None and (self.current_char in literals or self.current_char in symbols or self.current_char in digits):
                 string += self.current_char
                 self.advance()
-        if string in arithmatic_operators or string in logical_operators or string in bitwise_operators or string in assignment_operators or string in relational_operators or string in list_bracket_operators:
-            return self.get_token_by_name(string)
-        elif re.match(variable_regex_exp, string) or string in quotations:
+        
+        token = self.string_in_tokens(string)
+        if token:
+            return token
+        elif re.match(variable_regex_exp, string):
             return string
         else:
             raise Exception(f"Illegal string [ {string} ] in line [ {self.text} ] position [ {self.pos} ]")
         
-    def get_token_by_name(self, name):
-        if name in arithmatic_operators:
-            return arithmatic_tokens[arithmatic_operators.index(name)]
-        if name in logical_operators:
-            return logical_tokens[logical_operators.index(name)]
-        if name in bitwise_operators:
-            return bitwise_tokens[bitwise_operators.index(name)]
-        if name in assignment_operators:
-            return assignment_tokens[assignment_operators.index(name)]
-        if name in relational_operators:
-            return relational_tokens[relational_operators.index(name)]
-        if name in list_bracket_operators:
-            return list_bracket_tokens[list_bracket_operators.index(name)]
+        
+    def string_in_tokens(self, string):
+        for token in tokens:
+            if token.name == string:
+                return token
+        return False
         
 
 

@@ -41,7 +41,10 @@ greaterthanorequal_tok = Token(">=", ">=", "rel")
 ass_tok = Token("=", "<=", "assignment")
 
 
-## list brackets tokens
+## additional tokens
 
-left_bracket_tok = Token("[", "(", "list_brackets")
-right_bracket_tok = Token("]", ")", "list_brackets")
+left_bracket_tok = Token("[", "(")
+right_bracket_tok = Token("]", ")")
+
+single_quotation_tok = Token("'", "'")
+double_quotation_tok = Token('''"''', '''"''')
