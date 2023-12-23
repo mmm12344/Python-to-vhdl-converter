@@ -1,5 +1,6 @@
 from .validation import validate_data_types
 from .logic_converter import parse_file
+from .to_json import add_input, add_output, add_signal
 
 def style(block):
     styled = [""]
@@ -100,6 +101,8 @@ class Input():
         self.name = name
         self.type = type
         validate_data_types(type)
+        add_input(self)
+        
     def __str__(self):
         return f"{self.name} : in {self.type.__repr__()}"
     
@@ -108,6 +111,7 @@ class Output():
         self.name = name
         self.type = type
         validate_data_types(type)
+        add_output(self)
     def __str__(self):
         return f"{self.name} : out {self.type.__repr__()}"
 
@@ -116,5 +120,6 @@ class Signal():
         self.name = name
         self.type = type
         validate_data_types(type)
+        add_signal(self)
     def __str__(self):
         return f"signal {self.name} : {self.type.__repr__()}"

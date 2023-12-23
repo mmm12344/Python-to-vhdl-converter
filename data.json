@@ -1,1 +1,20 @@
-{"inputs": {}, "outputs": {}, "signals": {}}
+{
+    "inputs": {
+        "A": {
+            "type": "std_logic"
+        }
+    },
+    "outputs": {
+        "B": {
+            "type": "std_logic"
+        }
+    },
+    "signals": {
+        "D": {
+            "type": "std_logic_vector"
+        },
+        "E": {
+            "type": "std_logic"
+        }
+    }
+}

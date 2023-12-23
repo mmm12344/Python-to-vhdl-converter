@@ -37,6 +37,9 @@ register_tokens(
     
     right_bracket_tok,
     left_bracket_tok,
+    
+    single_quotation_tok,
+    double_quotation_tok,
 )
 
 
