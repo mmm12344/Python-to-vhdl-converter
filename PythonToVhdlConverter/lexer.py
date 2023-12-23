@@ -138,7 +138,7 @@ class Lexer:
                 string += self.current_char
                 self.advance()
         else:
-            while self.current_char != None and (self.current_char in literals or self.current_char in symbols or self.current_char in digits):
+            while self.current_char != None and (self.current_char.lower() in literals or self.current_char in symbols or self.current_char in digits):
                 string += self.current_char
                 self.advance()
         

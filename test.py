@@ -20,9 +20,25 @@ def logic():
     a = b + a
     b = b << 1 >> 2
     
-    a[0] = "1"
+    a[0] == "10"
     
     a2 = 2
+    
+    if mario == 1:
+        x = 0
+    elif  mario == 2:
+        x = 2
+    else :
+        x = 1
+        
+    A = not c
+    
+    
+    A = 1
+    
+    
+    
+         
     
 
     mario = 30 ** 4 % 15 |sra| 40

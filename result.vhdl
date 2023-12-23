@@ -12,8 +12,17 @@ architecture behavior of Mux is
 	begin
 		a <= b + a ;
 		b <= b sll 1 srl 2 ;
-		a ( 0 ) <= " 1 " ;
+		a ( 0 ) = " 10 " ;
 		a2 <= 2 ;
+		if mario = 1 then
+			x <= 0 ;
+		elsif mario = 2 then
+			x <= 2 ;
+		else
+			x <= 1 ;
+		end if;
+		A <= not c ;
+		A <= 1 ;
 		mario <= 30 ** 4 mod 15 sra 40 ;
 		for i in 1 to 10 loop
 				i <= 1 ;
