@@ -27,6 +27,19 @@ def logic():
         
     for i in range(1, 10):
         i = 1
+        while i < 4:
+            mario = 1
+            while i < 4:
+                mario = 1
+            for i in range(1, 10):
+                i = 1
+        for i in range(1, 10):
+            i = 1
+            while i < 4:
+                mario = 1
+                for i in range(1, 10):
+                    i = 1
+        i = 5
 
     match i:
         case 3:
@@ -36,6 +49,17 @@ def logic():
 
     while i < 5:
         mario = 3
+        while mario == 3:
+            i = 5
+            while i < 4:
+                mario = 1
+            for i in range(1, 10):
+                i = 1
+        
+        while i < 4:
+            mario = 1
+        for i in range(1, 10):
+            i = 1
         
     @process
     def process(x, y):
