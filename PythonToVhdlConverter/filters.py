@@ -280,13 +280,14 @@ class Match_Case_Condition_Filter:
 
             if match_case_match:
                 token = Match_Case_Token("match", match_case_match.group(1), None)
+                self.tokens.append(token)
             elif case_match:
                 token = Match_Case_Token("case", None, case_match.group(1))
+                self.tokens.append(token)
             else:
                 self.tokens[-1].add_statement(Statement_filter(line))
                 continue
 
-            self.tokens.append(token)
         
     def parse(self):
         parsed_block = ''
@@ -319,13 +320,14 @@ class For_loop_filter:
         self.tokenize()
     
     def tokenize(self):
-        for line in self.lines:
+        for index, line in enumerate(self.lines):
             for_match = re.match(self.for_regex_exp, line)
             if for_match:
                 token = For_loop_token(for_match.group(1), for_match.group(2), for_match.group(3))
                 self.tokens.append(token)
             else:
-                self.tokens[-1].add_statement(Statement_filter(line))
+                self.tokens[-1].add_statement(Capture(self.lines[index:]))
+                break
 
     def parse(self):
         parsed_block = ""
@@ -351,13 +353,14 @@ class While_loop_filter:
         self.tokenize()
     
     def tokenize(self):
-        for line in self.lines:
+        for index, line in enumerate(self.lines):
             while_match = re.match(self.while_regex_exp, line)
             if while_match:
                 token = While_loop_token(while_match.group(1))
                 self.tokens.append(token)
             else:
-                self.tokens[-1].add_statement(Statement_filter(line))
+                self.tokens[-1].add_statement(Capture(self.lines[index:]))
+                break
 
     def parse(self):
         parsed_block = ""
