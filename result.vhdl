@@ -4,7 +4,7 @@ port(
 	
 	B : out std_logic
 );
-end Mux
+end Mux;
 architecture behavior of Mux is
 	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
@@ -94,4 +94,4 @@ architecture behavior of Mux is
 		
 		end process;
 
-	end;
+	end behavior;
