@@ -1,19 +1,31 @@
 {
     "inputs": {
-        "A": {
+        "a": {
+            "type": "std_logic"
+        },
+        "b": {
+            "type": "std_logic"
+        },
+        "cin": {
             "type": "std_logic"
         }
     },
     "outputs": {
-        "B": {
+        "sum": {
+            "type": "std_logic"
+        },
+        "cout": {
             "type": "std_logic"
         }
     },
     "signals": {
-        "D": {
-            "type": "std_logic_vector"
+        "x1": {
+            "type": "std_logic"
         },
-        "E": {
+        "x2": {
+            "type": "std_logic"
+        },
+        "x3": {
             "type": "std_logic"
         }
     }
