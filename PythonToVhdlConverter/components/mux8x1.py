@@ -36,4 +36,3 @@ def logic():
              opt = inp6
             case  " 111 "  :
              opt = inp7
-
