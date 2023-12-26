@@ -1,7 +1,7 @@
 from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal, Architecture
 from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector
 from PythonToVhdlConverter.to_vhdl import save_to_file
-from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
+from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
 import time
 
 class Mux():
@@ -34,10 +34,12 @@ def logic():
     A = not c
     
     
+    
+    
     A = 1
     
     
-    
+    a_1 = 0
          
     
 

@@ -23,6 +23,7 @@ architecture behavior of Mux is
 		end if;
 		A <= not c ;
 		A <= 1 ;
+		a_1 <= 0 ;
 		mario <= 30 ** 4 mod 15 sra 40 ;
 		for i in 1 to 10 loop
 				i <= 1 ;

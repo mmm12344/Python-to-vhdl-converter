@@ -2,10 +2,10 @@ import re
 
 digits = "0123456789"
 literals = "thequickbrownfoxjumpsoverthelazydog"
-break_string_symbols = """['"]<>-+*/%^<>=!"""
-symbols = """'"_<>-+*/%^<>=!|"""
+break_string_symbols = """['"]<>-+*/%^<>=!()"""
+symbols = """'"_<>-+*/%^<>=!|()"""
 
-variable_regex_exp = "^([A-Z]|[a-z])+([0-9])*$"
+variable_regex_exp = "^([A-Z]|[a-z])+(_*|[0-9])*$"
 
 
 tokens = []
@@ -44,6 +44,7 @@ class Token:
         self.replace_with = replace_with
         self.type = type
         self.in_middle = in_middle
+        register_token(self)
     def __repr__(self):
         return self.replace_with
     def __str__(self):
