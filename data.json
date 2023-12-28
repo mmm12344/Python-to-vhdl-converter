@@ -1,31 +1,19 @@
 {
     "inputs": {
-        "a": {
+        "clock": {
             "type": "std_logic"
         },
-        "b": {
-            "type": "std_logic"
-        },
-        "cin": {
+        "t": {
             "type": "std_logic"
         }
     },
     "outputs": {
-        "sum": {
-            "type": "std_logic"
-        },
-        "cout": {
+        "q": {
             "type": "std_logic"
         }
     },
     "signals": {
-        "x1": {
-            "type": "std_logic"
-        },
-        "x2": {
-            "type": "std_logic"
-        },
-        "x3": {
+        "tmp": {
             "type": "std_logic"
         }
     }
