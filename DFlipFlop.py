@@ -20,7 +20,7 @@ class Arch():
 def logic():
     @process
     def process(clock, data):
-        if clock == " clock' ":
+        if rising_edge(clock):
             q = data
 
 save_to_file(Entity(DFlipFlop()), Architecture(Arch()))
