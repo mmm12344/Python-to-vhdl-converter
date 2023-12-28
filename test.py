@@ -1,7 +1,7 @@
 from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal, Architecture
 from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector
 from PythonToVhdlConverter.to_vhdl import save_to_file
-from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
+from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
 import time
 
 class Mux():
@@ -20,9 +20,27 @@ def logic():
     a = b + a
     b = b << 1 >> 2
     
-    a[0] = "1"
+    a[0] == "10"
     
     a2 = 2
+    
+    if mario == 1:
+        x = 0
+    elif  mario == 2:
+        x = 2
+    else :
+        x = 1
+        
+    A = not c
+    
+    
+    
+    
+    A = 1
+    
+    
+    a_1 = 0
+         
     
 
     mario = 30 ** 4 % 15 |sra| 40

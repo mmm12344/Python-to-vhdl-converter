@@ -43,8 +43,11 @@ ass_tok = Token("=", "<=", "assignment")
 
 ## additional tokens
 
-left_bracket_tok = Token("[", "(")
-right_bracket_tok = Token("]", ")")
+left_square_bracket_tok = Token("[", "(")
+right_square_bracket_tok = Token("]", ")")
+
+left_parentheses_tok = Token("(", "(")
+right_parentheses_tok = Token(")", ")")
 
 single_quotation_tok = Token("'", "'")
 double_quotation_tok = Token('''"''', '''"''')

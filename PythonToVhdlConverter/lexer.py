@@ -2,10 +2,10 @@ import re
 
 digits = "0123456789"
 literals = "thequickbrownfoxjumpsoverthelazydog"
-break_string_symbols = """['"]<>-+*/%^<>=!"""
-symbols = """'"_<>-+*/%^<>=!|"""
+break_string_symbols = """['"]<>-+*/%^<>=!()"""
+symbols = """'"_<>-+*/%^<>=!|()"""
 
-variable_regex_exp = "^([A-Z]|[a-z])+([0-9])*$"
+variable_regex_exp = "^([A-Z]|[a-z])+(_*|[0-9])*$"
 
 
 tokens = []
@@ -44,6 +44,7 @@ class Token:
         self.replace_with = replace_with
         self.type = type
         self.in_middle = in_middle
+        register_token(self)
     def __repr__(self):
         return self.replace_with
     def __str__(self):
@@ -138,7 +139,7 @@ class Lexer:
                 string += self.current_char
                 self.advance()
         else:
-            while self.current_char != None and (self.current_char in literals or self.current_char in symbols or self.current_char in digits):
+            while self.current_char != None and (self.current_char.lower() in literals or self.current_char in symbols or self.current_char in digits):
                 string += self.current_char
                 self.advance()
         

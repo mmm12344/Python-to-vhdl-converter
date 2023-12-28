@@ -34,7 +34,7 @@ class Entity():
         Returns:
             str: VHDL code for an entity.
         """
-        return f"entity {self.entity_class.name} is\nport(\n{self.create_port()}\n);\nend {self.entity_class.name}"
+        return f"entity {self.entity_class.name} is\nport(\n{self.create_port()}\n);\nend {self.entity_class.name};"
     def create_port(self):
         """
         Creates VHDL port.
@@ -79,7 +79,7 @@ class Architecture():
         Returns:
             str: The VHDL code for an architecture with signals.
         """
-        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{self.create_signals()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend;"
+        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{self.create_signals()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend {self.architecture_class.name};"
     def create_signals(self):
         """
         Creates VHDL signals.

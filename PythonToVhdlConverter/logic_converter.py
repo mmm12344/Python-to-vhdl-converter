@@ -20,6 +20,11 @@ def logic(func):
 def process(func):
     return 0
 
+def rising_edge(var):
+    return 0
+def falling_edge(var):
+    return 0
+
 def get_lines(file_path):
     """
     Reads file and returns lines.
