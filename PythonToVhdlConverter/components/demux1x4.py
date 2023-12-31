@@ -4,11 +4,14 @@ from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
 import time
 
+
+@Entity
 class DeMux1x4():
     name = "DeMux1x4"
     inputs = [Input("inp", Std_logic()), Input("select", Std_logic_vector(2))]
     outputs = [Output("opt0", Std_logic()), Output("opt1", Std_logic()), Output("opt2", Std_logic()), Output("opt3", Std_logic())]
 
+@Architecture
 class Arch():
     path = __file__
     signals = []

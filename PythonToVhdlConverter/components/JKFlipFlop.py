@@ -4,12 +4,13 @@ from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
 import time
 
-
+@Entity
 class JKFlipFlop():
     name = "JKFlipFlop"
     inputs = [Input("clock", Std_logic()), Input("j", Std_logic()),Input("k", Std_logic())]
     outputs = [Output("q", Std_logic()),Output("qb", Std_logic())]
 
+@Architecture
 class Arch():
     path = __file__
     signals = []

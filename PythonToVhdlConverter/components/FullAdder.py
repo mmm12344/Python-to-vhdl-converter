@@ -4,11 +4,13 @@ from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
 import time
 
+@Entity
 class FullAdder():
     name = "FullAdder"
     inputs = [Input("a", Std_logic()), Input("b", Std_logic()),Input("cin", Std_logic())]
     outputs = [Output("sum", Std_logic()), Output("cout", Std_logic())]
 
+@Architecture
 class Arch():
     path = __file__  
     signals = [Signal("x1", Std_logic()), Signal("x2", Std_logic()),Signal("x3", Std_logic())]

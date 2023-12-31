@@ -4,11 +4,13 @@ from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
 import time
 
+@Entity
 class encoder8to3():
     name = "encoder8to3"
     inputs = [Input("a", Std_logic_vector(8))]
     outputs = [Output("b", Std_logic_vector(3))]
-      
+
+@Architecture  
 class Arch():
     path = __file__
     signals = []

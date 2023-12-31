@@ -1,6 +1,6 @@
 from .validation import validate_data_types
 from .logic_converter import parse_file
-from .to_json import add_input, add_output, add_signal
+from . import files
 
 def style(block):
     styled = [""]
@@ -24,6 +24,7 @@ class Entity():
         """
         self.entity_class = entity_class
         entity_structure = self.convert_entity()
+        files.append({"entity": self})
     def convert_entity(self):
         """
         Converts class (entity) to VHDL code.
@@ -68,7 +69,9 @@ class Architecture():
         Parameters:
             ?:?
         """
+        self.file_name = architecture_class.path.split("\\")[-1].split(".")[0]
         self.architecture_class = architecture_class
+        files[-1]["architicture"] = self
     def convert_arch(self):
         """
         Converts class (architecture) to VHDL code.
@@ -101,7 +104,6 @@ class Input():
         self.name = name
         self.type = type
         validate_data_types(type)
-        add_input(self)
         
     def __str__(self):
         return f"{self.name} : in {self.type.__repr__()}"
@@ -111,7 +113,6 @@ class Output():
         self.name = name
         self.type = type
         validate_data_types(type)
-        add_output(self)
     def __str__(self):
         return f"{self.name} : out {self.type.__repr__()}"
 
@@ -120,6 +121,5 @@ class Signal():
         self.name = name
         self.type = type
         validate_data_types(type)
-        add_signal(self)
     def __str__(self):
         return f"signal {self.name} : {self.type.__repr__()}"

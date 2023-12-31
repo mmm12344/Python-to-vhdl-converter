@@ -4,12 +4,13 @@ from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process
 import time
 
-
+@Entity
 class Decoder3x8():
     name = "Decoder3x8"
     inputs = [Input("inp", Std_logic_vector(3))]
     outputs = [Output("opt", Std_logic_vector(8))]
 
+@Architecture
 class Arch():
     path = __file__
     signals = []

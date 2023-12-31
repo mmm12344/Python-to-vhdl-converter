@@ -1,4 +1,3 @@
-
 entity Mux is
 port(
 	A : in std_logic;
@@ -98,4 +97,3 @@ architecture behavior of Mux is
 		end process;
 
 	end behavior;
-
