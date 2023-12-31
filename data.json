@@ -1,19 +1,19 @@
 {
     "inputs": {
-        "A": {
+        "clock": {
+            "type": "std_logic"
+        },
+        "t": {
             "type": "std_logic"
         }
     },
     "outputs": {
-        "B": {
+        "q": {
             "type": "std_logic"
         }
     },
     "signals": {
-        "D": {
-            "type": "std_logic_vector"
-        },
-        "E": {
+        "tmp": {
             "type": "std_logic"
         }
     }
