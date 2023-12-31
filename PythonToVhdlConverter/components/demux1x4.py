@@ -7,6 +7,7 @@ import time
 
 @Entity
 class DeMux1x4():
+    is_component = True
     name = "DeMux1x4"
     inputs = [Input("inp", Std_logic()), Input("select", Std_logic_vector(2))]
     outputs = [Output("opt0", Std_logic()), Output("opt1", Std_logic()), Output("opt2", Std_logic()), Output("opt3", Std_logic())]

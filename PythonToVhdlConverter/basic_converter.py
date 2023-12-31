@@ -1,6 +1,6 @@
 from .validation import validate_data_types
 from .logic_converter import parse_file
-from . import files
+from . import files, components
 
 def style(block):
     styled = [""]
@@ -25,6 +25,11 @@ class Entity():
         self.entity_class = entity_class
         entity_structure = self.convert_entity()
         files.append({"entity": self})
+        try:
+            if self.entity_class.is_component:
+                components.append(self)
+        except:
+            pass
     def convert_entity(self):
         """
         Converts class (entity) to VHDL code.
@@ -82,7 +87,7 @@ class Architecture():
         Returns:
             str: The VHDL code for an architecture with signals.
         """
-        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{self.create_signals()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend {self.architecture_class.name};"
+        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{style(CreateComponents().convert_component())}\n{self.create_signals()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend {self.architecture_class.name};"
     def create_signals(self):
         """
         Creates VHDL signals.
@@ -97,6 +102,34 @@ class Architecture():
         for signal in self.architecture_class.signals:
             signals += signal.__str__() + ";\n"
         return style(signals)
+
+class CreateComponents:
+    def __init__(self):
+        pass
+
+    def convert_component(self):
+        result = ""
+        for component in components:
+            result += f"component {component.entity_class.name} is\nport(\n{self.create_port(component)}\n);\nend component;\n"
+        return result
+    def create_port(self, component):
+        """
+        Creates VHDL port.
+ 
+        Args:
+            self
+ 
+        Returns:
+            str: The VHDL code for a port with inputs and outputs.
+        """
+        port = ""
+        for input in component.entity_class.inputs:
+            port += input.__str__() + ";\n"
+        for output in component.entity_class.outputs:
+            port += "\n" + output.__str__() + ";"
+        port = port[:-1] # to avoid writing ';);'
+        return style(port)
+            
             
 
 class Input():

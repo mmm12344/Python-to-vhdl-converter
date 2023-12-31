@@ -6,6 +6,7 @@ import time
 
 @Entity
 class Decoder3x8():
+    is_component = True
     name = "Decoder3x8"
     inputs = [Input("inp", Std_logic_vector(3))]
     outputs = [Output("opt", Std_logic_vector(8))]

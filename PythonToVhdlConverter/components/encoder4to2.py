@@ -6,6 +6,7 @@ import time
 
 @Entity
 class encoder4to2():
+    is_component = True
     name = "encoder4to2"
     inputs = [Input("a", Std_logic_vector(4))]
     outputs = [Output("b", Std_logic_vector(2))]

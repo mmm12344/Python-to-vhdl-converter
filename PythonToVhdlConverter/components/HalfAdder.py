@@ -6,6 +6,7 @@ import time
 
 @Entity
 class HalfAdder():
+    is_component = True
     name = "HalfAdder"
     inputs = [Input("a", Std_logic()), Input("b", Std_logic())]
     outputs = [Output("sum", Std_logic()), Output("carry", Std_logic())]

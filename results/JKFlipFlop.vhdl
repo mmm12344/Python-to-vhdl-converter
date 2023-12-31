@@ -1,15 +1,14 @@
-entity Mux4x1 is
+entity JKFlipFlop is
 port(
-	inp0 : in std_logic;
-	inp1 : in std_logic;
-	inp2 : in std_logic;
-	inp3 : in std_logic;
-	select : in std_logic_vector(1 downto 0);
+	clock : in std_logic;
+	j : in std_logic;
+	k : in std_logic;
 	
-	opt : out std_logic
+	q : out std_logic;
+	qb : out std_logic
 );
-end Mux4x1;
-architecture behavior of Mux4x1 is
+end JKFlipFlop;
+architecture behavior of JKFlipFlop is
 	component Mux4x1 is
 	port(
 		inp0 : in std_logic;
@@ -45,17 +44,21 @@ architecture behavior of Mux4x1 is
 
 
 	begin
-		process (inp0,inp1,inp2,inp3,select)
-			case select is
-				when " 00 " =>
-					opt <= inp0 ;
-				when " 01 " =>
-					opt <= inp1 ;
-				when " 10 " =>
-					opt <= inp2 ;
-				when " 11 " =>
-					opt <= inp3 ;
-			end case;
+		process (clock)
+			if rising_edge ( clock ) then
+			if j = ' 0 ' and k = ' 0 ' then
+				TMP <= TMP ;
+			elsif j = ' 1 ' and k = ' 1 ' then
+				TMP <= not TMP ;
+			elsif j = ' 0 ' and k = ' 1 ' then
+				TMP <= ' 0 ' ;
+			else
+				TMP <= ' 1 ' ;
+			end if;
+		
+			q <= TMP ;
+		
+			q <= not TMP ;
 		
 		end process;
 

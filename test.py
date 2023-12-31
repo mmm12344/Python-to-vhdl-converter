@@ -2,7 +2,7 @@ from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal,
 from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector
 from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
-from PythonToVhdlConverter.components import mux4x1
+from PythonToVhdlConverter.components import mux4x1, JKFlipFlop, demux1x4
 import time
 
 @Entity
@@ -20,6 +20,7 @@ class Arch():
                
 @logic
 def logic():
+    
     a = b + a
     b = b << 1 >> 2
     

@@ -1,15 +1,15 @@
-entity Mux4x1 is
+entity DeMux1x4 is
 port(
-	inp0 : in std_logic;
-	inp1 : in std_logic;
-	inp2 : in std_logic;
-	inp3 : in std_logic;
+	inp : in std_logic;
 	select : in std_logic_vector(1 downto 0);
 	
-	opt : out std_logic
+	opt0 : out std_logic;
+	opt1 : out std_logic;
+	opt2 : out std_logic;
+	opt3 : out std_logic
 );
-end Mux4x1;
-architecture behavior of Mux4x1 is
+end DeMux1x4;
+architecture behavior of DeMux1x4 is
 	component Mux4x1 is
 	port(
 		inp0 : in std_logic;
@@ -45,16 +45,28 @@ architecture behavior of Mux4x1 is
 
 
 	begin
-		process (inp0,inp1,inp2,inp3,select)
+		process (inp, select)
 			case select is
 				when " 00 " =>
-					opt <= inp0 ;
+					opt0 <= inp ;
+					opt1 <= ' 0 ' ;
+					opt2 <= ' 0 ' ;
+					opt3 <= ' 0 ' ;
 				when " 01 " =>
-					opt <= inp1 ;
+					opt0 <= ' 0 ' ;
+					opt1 <= inp ;
+					opt2 <= ' 0 ' ;
+					opt3 <= ' 0 ' ;
 				when " 10 " =>
-					opt <= inp2 ;
+					opt0 <= ' 0 ' ;
+					opt1 <= ' 0 ' ;
+					opt2 <= inp ;
+					opt3 <= ' 0 ' ;
 				when " 11 " =>
-					opt <= inp3 ;
+					opt0 <= ' 0 ' ;
+					opt1 <= ' 0 ' ;
+					opt2 <= ' 0 ' ;
+					opt3 <= inp ;
 			end case;
 		
 		end process;

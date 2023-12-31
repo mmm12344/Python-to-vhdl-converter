@@ -6,6 +6,7 @@ import time
 
 @Entity
 class JKFlipFlop():
+    is_component = True
     name = "JKFlipFlop"
     inputs = [Input("clock", Std_logic()), Input("j", Std_logic()),Input("k", Std_logic())]
     outputs = [Output("q", Std_logic()),Output("qb", Std_logic())]
@@ -24,11 +25,11 @@ def logic():
         if rising_edge(clock):
             if j == '0' and k == '0' :
                     TMP = TMP
-            elif j == '1' and k=='1' :
+            elif j == '1' and k == '1' :
                  TMP = not TMP
-            elif j == '0' and k== '1' : 
+            elif j == '0' and k == '1' : 
                      TMP = '0'
-            else:
+            else :
                  TMP = '1'
         q = TMP
         q = not TMP     

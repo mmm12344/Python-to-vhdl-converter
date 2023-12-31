@@ -6,6 +6,7 @@ import time
 
 @Entity
 class DFlipFlop():
+    is_component = True
     name = "DFlipFlop"
     inputs = [Input("clock", Std_logic()), Input("d", Std_logic())]
     outputs = [Output("q", Std_logic())]

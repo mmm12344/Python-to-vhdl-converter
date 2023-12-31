@@ -6,6 +6,7 @@ import time
 
 @Entity
 class FullAdder():
+    is_component = True
     name = "FullAdder"
     inputs = [Input("a", Std_logic()), Input("b", Std_logic()),Input("cin", Std_logic())]
     outputs = [Output("sum", Std_logic()), Output("cout", Std_logic())]

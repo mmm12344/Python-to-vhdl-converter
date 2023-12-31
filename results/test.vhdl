@@ -6,6 +6,39 @@ port(
 );
 end Mux;
 architecture behavior of Mux is
+	component Mux4x1 is
+	port(
+		inp0 : in std_logic;
+		inp1 : in std_logic;
+		inp2 : in std_logic;
+		inp3 : in std_logic;
+		select : in std_logic_vector(1 downto 0);
+		
+		opt : out std_logic
+	);
+	end component;
+	component JKFlipFlop is
+	port(
+		clock : in std_logic;
+		j : in std_logic;
+		k : in std_logic;
+		
+		q : out std_logic;
+		qb : out std_logic
+	);
+	end component;
+	component DeMux1x4 is
+	port(
+		inp : in std_logic;
+		select : in std_logic_vector(1 downto 0);
+		
+		opt0 : out std_logic;
+		opt1 : out std_logic;
+		opt2 : out std_logic;
+		opt3 : out std_logic
+	);
+	end component;
+
 	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
 

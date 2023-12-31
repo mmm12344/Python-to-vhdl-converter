@@ -6,6 +6,7 @@ import time
 
 @Entity
 class encoder8to3():
+    is_component = True
     name = "encoder8to3"
     inputs = [Input("a", Std_logic_vector(8))]
     outputs = [Output("b", Std_logic_vector(3))]
