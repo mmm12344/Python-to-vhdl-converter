@@ -32,16 +32,12 @@ def logic():
         x = 1
         
     A = not c
-    
-    
-    
-    
+  
     A = 1
     
+    rising_edge(mario)
     
     a_1 = 0
-         
-    
 
     mario = 30 ** 4 % 15 |sra| 40
         
