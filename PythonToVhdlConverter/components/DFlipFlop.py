@@ -7,7 +7,7 @@ import time
 @Entity
 class DFlipFlop():
     is_component = True
-    name = "DFlipFlop"
+    name = "dFlipFlop"
     inputs = [Input("clock", Std_logic()), Input("d", Std_logic())]
     outputs = [Output("q", Std_logic())]
 
@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity_name = "DFlipFlop"
+    entity_name = "dFlipFlop"
 
 @logic
 def logic():

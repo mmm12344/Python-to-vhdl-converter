@@ -7,7 +7,7 @@ import time
 @Entity
 class Decoder2x4():
     is_component = True
-    name = "Decoder2x4"
+    name = "decoder2x4"
     inputs = [Input("inp", Std_logic_vector(2))]
     outputs = [Output("opt", Std_logic_vector(4))]
 
@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity_name = "Decoder2x4"
+    entity_name = "decoder2x4"
 
 @logic
 def logic():
