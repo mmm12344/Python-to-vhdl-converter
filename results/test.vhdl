@@ -31,162 +31,30 @@ architecture behavior of Mux is
 	constant seven_segement_pattern : array ( 0 to 9 ) of std_logic_vector(6 downto 0);
 
 	begin
-		seven_segement_pattern ( 0 ) <= " 0000001 " ;
-		seven_segement_pattern ( 1 ) <= " 343454534 " ;
-		seven_segement_pattern ( 2 ) <= " 343454534 " ;
-		seven_segement_pattern ( 3 ) <= " 343454534 " ;
-		seven_segement_pattern ( 4 ) <= " 343454534 " ;
-		seven_segement_pattern ( 5 ) <= " 343454534 " ;
-		a <= b + a ;
-		b <= b sll 1 srl 2 ;
-		a ( 0 ) = " 10 " ;
-		a2 <= 2 ;
-		if mario = 1 then
-				if mario = 2 then
-						x <= 2 ;
-						if v = 3 then
-								x <= 10 ;
-						else
-								x <= 9 ;
-						end if;
-				elsif mario = 4 then
-						x <= 3 ;
-						if v = 3 then
-								x <= 10 ;
-						else
-								x <= 9 ;
-						end if;
-				else
-						x <= 3 ;
-						if v = 3 then
-								x <= 10 ;
-								while i < 4 loop
-										mario <= 1 ;
-										while i < 4 loop
-												mario <= 1 ;
-										end loop;
-										for i in 1 to 10 loop
-												i <= 1 ;
-										end loop;
-								end loop;
-						else
-								x <= 9 ;
-						end if;
-				end if;
-		elsif mario = 4 then
-				x <= 3 ;
-		else
-				x <= 1 ;
-				if v = 3 then
-						x <= 10 ;
-				elsif mario = 1 then
-						omar <= 3 ;
-				else
-						x <= 9 ;
-				end if;
-		end if;
-		A <= not c ;
-		A <= 1 ;
-		rising_edge ( mario ) ;
-		a_1 <= 0 ;
-		mario <= 30 ** 4 mod 15 sra 40 ;
-		for i in 1 to 10 loop
-				i <= 1 ;
-				while i < 4 loop
-						mario <= 1 ;
-						while i < 4 loop
-								mario <= 1 ;
-						end loop;
-						for i in 1 to 10 loop
-								i <= 1 ;
-						end loop;
-				end loop;
-				for i in 1 to 10 loop
-						i <= 1 ;
-						while i < 4 loop
-								mario <= 1 ;
-								for i in 1 to 10 loop
-										i <= 1 ;
-										if v = 3 then
-												x <= 10 ;
-										else
-												x <= 0 ;
-										end if;
-								end loop;
-						end loop;
-				end loop;
-				i <= 5 ;
-		end loop;
-		case i is
-			when 3 =>
-				mario <= 3 ;
-			when 4 =>
-				i <= 5 ;
-		end case;
-		while i < 5 loop
-				mario <= 3 ;
-				while mario = 3 loop
-						i <= 5 ;
-						while i < 4 loop
-								mario <= 1 ;
-						end loop;
-						for i in 1 to 10 loop
-								i <= 1 ;
-						end loop;
-				end loop;
-				while i < 4 loop
-						mario <= 1 ;
-						if v = 3 then
-								x <= 10 ;
-								if v = 3 then
-										x <= 10 ;
-								else
-										x <= 9 ;
-								end if;
-						else
-								x <= 9 ;
-						end if;
-				end loop;
-				for i in 1 to 10 loop
-						i <= 1 ;
-						if v = 3 then
-								x <= 10 ;
-						else
-								x <= 9 ;
-						end if;
-				end loop;
-		end loop;
-		process (x, y)
-			if mario / 2 <= 2 then
-					x <= 0 ;
-			elsif mario * 2 > 2 then
-					x <= 2 ;
-					if v = 3 then
-							x <= 10 ;
+		count <= 0 ;
+		demux_output <= " 0000 " ;
+		seven_segment_patterns ( 0 ) <= " 0000001 " ;
+		seven_segment_patterns ( 1 ) <= " 1001111 " ;
+		seven_segment_patterns ( 2 ) <= " 0010010 " ;
+		seven_segment_patterns ( 3 ) <= " 0000110 " ;
+		seven_segment_patterns ( 4 ) <= " 1001100 " ;
+		seven_segment_patterns ( 5 ) <= " 0100100 " ;
+		seven_segment_patterns ( 6 ) <= " 0100000 " ;
+		seven_segment_patterns ( 7 ) <= " 0001111 " ;
+		seven_segment_patterns ( 8 ) <= " 0000000 " ;
+		seven_segment_patterns ( 9 ) <= " 0000100 " ;
+		process (clk,rst)
+			if rst = ' 1 ' then
+					count <= 0 ;
+			elsif rising_edge ( clk ) then
+					if count = 9 then
+							count <= 0 ;
 					else
-							x <= 9 ;
+							count <= count + 1 ;
 					end if;
 			else
-					y <= 0 ;
+					0 ;
 			end if;
-		
-			case mario is
-				when 3 =>
-					i <= 3 ;
-				when 4 =>
-					mario <= 5 ;
-			end case;
-		
-			while mario < 5 loop
-					i <= 4 ;
-					if v = 3 then
-							x <= 10 ;
-					else
-							x <= 9 ;
-					end if;
-			end loop;
-		
-			mario <= 5 * 20 xnor 1 ;
 		
 		end process;
 
