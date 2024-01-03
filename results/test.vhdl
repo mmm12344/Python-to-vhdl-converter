@@ -6,38 +6,6 @@ port(
 );
 end Mux;
 architecture behavior of Mux is
-	component Mux4x1 is
-	port(
-		inp0 : in std_logic;
-		inp1 : in std_logic;
-		inp2 : in std_logic;
-		inp3 : in std_logic;
-		select : in std_logic_vector(1 downto 0);
-		
-		opt : out std_logic
-	);
-	end component;
-	component JKFlipFlop is
-	port(
-		clock : in std_logic;
-		j : in std_logic;
-		k : in std_logic;
-		
-		q : out std_logic;
-		qb : out std_logic
-	);
-	end component;
-	component DeMux1x4 is
-	port(
-		inp : in std_logic;
-		select : in std_logic_vector(1 downto 0);
-		
-		opt0 : out std_logic;
-		opt1 : out std_logic;
-		opt2 : out std_logic;
-		opt3 : out std_logic
-	);
-	end component;
 
 	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
@@ -48,11 +16,48 @@ architecture behavior of Mux is
 		a ( 0 ) = " 10 " ;
 		a2 <= 2 ;
 		if mario = 1 then
-			x <= 0 ;
-		elsif mario = 2 then
-			x <= 2 ;
+				if mario = 2 then
+						x <= 2 ;
+						if v = 3 then
+								x <= 10 ;
+						else
+								x <= 9 ;
+						end if;
+				elsif mario = 4 then
+						x <= 3 ;
+						if v = 3 then
+								x <= 10 ;
+						else
+								x <= 9 ;
+						end if;
+				else
+						x <= 3 ;
+						if v = 3 then
+								x <= 10 ;
+								while i < 4 loop
+										mario <= 1 ;
+										while i < 4 loop
+												mario <= 1 ;
+										end loop;
+										for i in 1 to 10 loop
+												i <= 1 ;
+										end loop;
+								end loop;
+						else
+								x <= 9 ;
+						end if;
+				end if;
+		elsif mario = 4 then
+				x <= 3 ;
 		else
-			x <= 1 ;
+				x <= 1 ;
+				if v = 3 then
+						x <= 10 ;
+				elsif mario = 1 then
+						omar <= 3 ;
+				else
+						x <= 9 ;
+				end if;
 		end if;
 		A <= not c ;
 		A <= 1 ;
@@ -76,6 +81,11 @@ architecture behavior of Mux is
 								mario <= 1 ;
 								for i in 1 to 10 loop
 										i <= 1 ;
+										if v = 3 then
+												x <= 10 ;
+										else
+												x <= 0 ;
+										end if;
 								end loop;
 						end loop;
 				end loop;
@@ -100,18 +110,38 @@ architecture behavior of Mux is
 				end loop;
 				while i < 4 loop
 						mario <= 1 ;
+						if v = 3 then
+								x <= 10 ;
+								if v = 3 then
+										x <= 10 ;
+								else
+										x <= 9 ;
+								end if;
+						else
+								x <= 9 ;
+						end if;
 				end loop;
 				for i in 1 to 10 loop
 						i <= 1 ;
+						if v = 3 then
+								x <= 10 ;
+						else
+								x <= 9 ;
+						end if;
 				end loop;
 		end loop;
 		process (x, y)
 			if mario / 2 <= 2 then
-				x <= 0 ;
+					x <= 0 ;
 			elsif mario * 2 > 2 then
-				x <= 2 ;
+					x <= 2 ;
+					if v = 3 then
+							x <= 10 ;
+					else
+							x <= 9 ;
+					end if;
 			else
-				y <= 0 ;
+					y <= 0 ;
 			end if;
 		
 			case mario is
@@ -123,6 +153,11 @@ architecture behavior of Mux is
 		
 			while mario < 5 loop
 					i <= 4 ;
+					if v = 3 then
+							x <= 10 ;
+					else
+							x <= 9 ;
+					end if;
 			end loop;
 		
 			mario <= 5 * 20 xnor 1 ;
