@@ -19,148 +19,180 @@ class Arch():
     name = "behavior"
     entity = Mux
                
+# @logic
+# def logic():
+    
+#     seven_segement_pattern[0] = "0000001"
+#     seven_segement_pattern[1] = "343454534"
+#     seven_segement_pattern[2] = "343454534"
+#     seven_segement_pattern[3] = "343454534"
+#     seven_segement_pattern[4] = "343454534"
+#     seven_segement_pattern[5] = "343454534"
+    
+#     a = b + a
+#     b = b << 1 >> 2
+    
+#     a[0] == "10"
+    
+#     a2 = 2
+    
+#     if mario == 1:
+#         if  mario == 2:
+#             x = 2
+#             if v == 3:
+#                 x = 10
+#             else :
+#                 x = 9
+#         elif mario == 4:
+#             x = 3
+#             if v == 3:
+#                 x = 10
+#             else :
+#                 x = 9
+#         else :
+#             x = 3
+#             if v == 3:
+#                 x = 10
+#                 while i < 4:
+#                     mario = 1
+#                     while i < 4:
+#                         mario = 1
+
+#                     for i in range(1, 10):
+#                         i = 1
+#             else :
+#                 x = 9
+#     elif mario == 4:
+#             x = 3
+#     else :
+#         x = 1
+#         if v == 3:
+#             x = 10
+#         elif mario == 1:
+#             omar = 3
+#         else :
+#             x = 9
+        
+#     A = not c
+  
+#     A = 1
+    
+#     rising_edge(mario)
+    
+#     a_1 = 0
+
+#     mario = 30 ** 4 % 15 |sra| 40
+        
+#     for i in range(1, 10):
+#         i = 1
+#         while i < 4:
+#             mario = 1
+#             while i < 4:
+#                 mario = 1
+#             for i in range(1, 10):
+#                 i = 1
+#         for i in range(1, 10):
+#             i = 1
+#             while i < 4:
+#                 mario = 1
+#                 for i in range(1, 10):
+#                     i = 1
+#                     if v == 3:
+#                         x = 10
+#                     else :
+#                         x = 0
+#         i = 5
+
+#     match i:
+#         case 3:
+#             mario = 3
+#         case 4:
+#             i = 5
+
+#     while i < 5:
+#         mario = 3
+#         while mario == 3:
+#             i = 5
+#             while i < 4:
+#                 mario = 1
+#             for i in range(1, 10):
+#                 i = 1
+        
+#         while i < 4:
+#             mario = 1
+#             if v == 3:
+#                 x = 10
+#                 if v == 3:
+#                     x = 10
+#                 else :
+#                     x = 9
+#             else :
+#                 x = 9
+#         for i in range(1, 10):
+#             i = 1
+#             if v == 3:
+#                 x = 10
+#             else :
+#                 x = 9
+        
+#     @process
+#     def process(x, y):
+#         if mario / 2 <= 2 :
+#             x = 0
+#         elif mario * 2 > 2 :
+#             x = 2
+#             if v == 3:
+#                 x = 10
+#             else :
+#                 x = 9
+#         else :
+#             y = 0
+
+#         match mario:
+#             case 3:
+#                 i = 3
+#             case 4:
+#                 mario = 5
+
+#         while mario < 5:
+#             i = 4
+#             if v == 3:
+#                 x = 10
+#             else :
+#                 x = 9
+            
+#         mario = 5 * 20 |xnor| 1
+
+
 @logic
 def logic():
+    count = 0
+    demux_output = "0000"
     
-    seven_segement_pattern[0] = "0000001"
-    seven_segement_pattern[1] = "343454534"
-    seven_segement_pattern[2] = "343454534"
-    seven_segement_pattern[3] = "343454534"
-    seven_segement_pattern[4] = "343454534"
-    seven_segement_pattern[5] = "343454534"
-    
-    a = b + a
-    b = b << 1 >> 2
-    
-    a[0] == "10"
-    
-    a2 = 2
-    
-    if mario == 1:
-        if  mario == 2:
-            x = 2
-            if v == 3:
-                x = 10
-            else :
-                x = 9
-        elif mario == 4:
-            x = 3
-            if v == 3:
-                x = 10
-            else :
-                x = 9
-        else :
-            x = 3
-            if v == 3:
-                x = 10
-                while i < 4:
-                    mario = 1
-                    while i < 4:
-                        mario = 1
+    seven_segment_patterns[0] = " 0000001 "
+    seven_segment_patterns[1] = " 1001111 "
+    seven_segment_patterns[2] = " 0010010 "
+    seven_segment_patterns[3] = " 0000110 "
+    seven_segment_patterns[4] = " 1001100 "
+    seven_segment_patterns[5] = " 0100100 "
+    seven_segment_patterns[6] = " 0100000 "
+    seven_segment_patterns[7] = " 0001111 "
+    seven_segment_patterns[8] = " 0000000 "
+    seven_segment_patterns[9] = " 0000100 "
 
-                    for i in range(1, 10):
-                        i = 1
-            else :
-                x = 9
-    elif mario == 4:
-            x = 3
-    else :
-        x = 1
-        if v == 3:
-            x = 10
-        elif mario == 1:
-            omar = 3
-        else :
-            x = 9
-        
-    A = not c
-  
-    A = 1
-    
-    rising_edge(mario)
-    
-    a_1 = 0
-
-    mario = 30 ** 4 % 15 |sra| 40
-        
-    for i in range(1, 10):
-        i = 1
-        while i < 4:
-            mario = 1
-            while i < 4:
-                mario = 1
-            for i in range(1, 10):
-                i = 1
-        for i in range(1, 10):
-            i = 1
-            while i < 4:
-                mario = 1
-                for i in range(1, 10):
-                    i = 1
-                    if v == 3:
-                        x = 10
-                    else :
-                        x = 0
-        i = 5
-
-    match i:
-        case 3:
-            mario = 3
-        case 4:
-            i = 5
-
-    while i < 5:
-        mario = 3
-        while mario == 3:
-            i = 5
-            while i < 4:
-                mario = 1
-            for i in range(1, 10):
-                i = 1
-        
-        while i < 4:
-            mario = 1
-            if v == 3:
-                x = 10
-                if v == 3:
-                    x = 10
-                else :
-                    x = 9
-            else :
-                x = 9
-        for i in range(1, 10):
-            i = 1
-            if v == 3:
-                x = 10
-            else :
-                x = 9
-        
     @process
-    def process(x, y):
-        if mario / 2 <= 2 :
-            x = 0
-        elif mario * 2 > 2 :
-            x = 2
-            if v == 3:
-                x = 10
-            else :
-                x = 9
-        else :
-            y = 0
+    def process( clk , rst ):
+        if rst == '1':
+            count = 0
 
-        match mario:
-            case 3:
-                i = 3
-            case 4:
-                mario = 5
+        elif rising_edge(clk):
+            if count == 9 :
+                count = 0
+            else:
+                count = count + 1
+        else:
+            0          
 
-        while mario < 5:
-            i = 4
-            if v == 3:
-                x = 10
-            else :
-                x = 9
-            
-        mario = 5 * 20 |xnor| 1
+        
 
 save_to_file()

@@ -209,7 +209,7 @@ class Process_filter:
         self.tokens = Capture(self.lines[1:]).get_tokens()
     
     def parse(self):
-        parsed_block = f"process ({self.sensitivity_list})\n"
+        parsed_block = f"process ({self.sensitivity_list})\nbegin\n"
         for token in self.tokens:
             parsed_block += token.parse() + "\n"
         parsed_block += "end process;\n"

@@ -43,7 +43,8 @@ architecture behavior of Mux is
 		seven_segment_patterns ( 7 ) <= " 0001111 " ;
 		seven_segment_patterns ( 8 ) <= " 0000000 " ;
 		seven_segment_patterns ( 9 ) <= " 0000100 " ;
-		process (clk,rst)
+		process ( clk , rst )
+		begin
 			if rst = ' 1 ' then
 					count <= 0 ;
 			elsif rising_edge ( clk ) then

@@ -20,6 +20,7 @@ architecture behavior of mux4x1 is
 
 	begin
 		process (inp0,inp1,inp2,inp3,select)
+		begin
 			case select is
 				when " 00 " =>
 					opt <= inp0 ;
