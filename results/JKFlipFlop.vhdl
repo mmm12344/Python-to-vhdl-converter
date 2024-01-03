@@ -43,6 +43,7 @@ architecture behavior of JKFlipFlop is
 	end component;
 
 
+
 	begin
 		process (clock)
 			if rising_edge ( clock ) then

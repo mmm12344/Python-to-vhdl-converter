@@ -37,6 +37,16 @@ class Integer:
     def __str__(self):
         return "integer"
     
+class Array:
+    def __init__(self, start_range, stop_range, data_type):
+        self.start_range = start_range
+        self.stop_range = stop_range
+        self.data_type = data_type
+    def __repr__(self):
+        return f"array ( {self.start_range} to {self.stop_range} ) of {self.data_type.__repr__()}"
+    def __str__(self):
+        return "array"
+    
 
     
     

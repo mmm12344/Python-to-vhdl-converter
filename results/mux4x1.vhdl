@@ -44,6 +44,7 @@ architecture behavior of mux4x1 is
 	end component;
 
 
+
 	begin
 		process (inp0,inp1,inp2,inp3,select)
 			case select is

@@ -1,5 +1,5 @@
-from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal, Architecture
-from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector, Integer
+from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal, Architecture, Constant
+from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector, Integer, Array
 from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
 from PythonToVhdlConverter.components import mux4x1, JKFlipFlop, demux1x4
@@ -15,11 +15,14 @@ class Mux():
 class Arch():
     path = __file__
     signals = [Signal("D", Std_logic_vector(3)), Signal("E", Std_logic())]
+    constants = [Constant( "mario" ,Array(0, 9, Std_logic_vector(10)))]
     name = "behavior"
     entity_name = "Mux"
                
 @logic
 def logic():
+    
+    
     
     a = b + a
     b = b << 1 >> 2

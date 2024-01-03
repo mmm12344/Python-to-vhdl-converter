@@ -44,6 +44,8 @@ architecture behavior of Mux is
 	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
 
+	constant mario : array ( 0 to 9 ) of std_logic_vector(9 downto 0);
+
 	begin
 		a <= b + a ;
 		b <= b sll 1 srl 2 ;
