@@ -97,24 +97,16 @@ class Capture:
     
     def capture_if(self):
         if_regex_exp = "\s*if (.+):$"
+        elif_regex_exp = "\s*elif (.+):$"
         else_regex_exp = "\s*else(.*):$"
         if_block_lines = []
-        if_counter = 0
-        found_else = False
-        else_counter = 0
-        else_line = ""
-        
+        if_line = self.current_line
+        if_block_lines.append(if_line)
+        self.advance()
         while self.current_line != None:
-            if re.match(if_regex_exp, self.current_line):
-                if_counter += 1
             
-            if found_else and (if_counter == else_counter) and (not self.is_child(else_line, self.current_line)):
+            if not self.is_child(if_line, self.current_line) and not re.match(elif_regex_exp, self.current_line) and not re.match(else_regex_exp, self.current_line):
                 break
-            if re.match(else_regex_exp, self.current_line):
-                found_else = True
-                else_line = self.current_line
-                else_counter += 1
-    
             if_block_lines.append(self.current_line)
 
             self.advance()

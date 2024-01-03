@@ -54,6 +54,21 @@ def logic():
         qmario = TMP
         qkdjfksjf = not TMP 
         
+    @process
+    def process(clock):
+        if rising_edge(clock):
+            if j == '0' and k == '0' :
+                TMP = TMP
+            elif j == '1' and k == '1' :
+                TMP = not TMP
+            elif j == '0' and k == '1' : 
+                TMP = '0'
+            else:
+                TMP = '1'
+        
+        q = TMP
+        q = not TMP     
+        
           
 
 save_to_file()

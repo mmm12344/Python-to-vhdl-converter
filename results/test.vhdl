@@ -75,5 +75,24 @@ architecture behavior of Mux is
 			qkdjfksjf <= not TMP ;
 		
 		end process;
+		process (clock)
+		begin
+			if rising_edge ( clock ) then
+					if j = ' 0 ' and k = ' 0 ' then
+							TMP <= TMP ;
+					elsif j = ' 1 ' and k = ' 1 ' then
+							TMP <= not TMP ;
+					elsif j = ' 0 ' and k = ' 1 ' then
+							TMP <= ' 0 ' ;
+					else
+							TMP <= ' 1 ' ;
+					end if;
+			end if;
+		
+			q <= TMP ;
+		
+			q <= not TMP ;
+		
+		end process;
 
 	end behavior;
