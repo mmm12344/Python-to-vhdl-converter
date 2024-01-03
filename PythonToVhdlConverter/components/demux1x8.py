@@ -5,7 +5,7 @@ from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, log
 import time
 
 @Entity
-class DeMux1x8():
+class deMux1x8():
     is_component = True
     name = "deMux1x8"
     inputs = [Input("inp", Std_logic()), Input("select", Std_logic_vector(3))]

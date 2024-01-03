@@ -5,7 +5,7 @@ from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, log
 import time
 
 @Entity
-class Decoder2x4():
+class decoder2x4():
     is_component = True
     name = "decoder2x4"
     inputs = [Input("inp", Std_logic_vector(2))]

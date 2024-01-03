@@ -5,9 +5,9 @@ from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, log
 import time
 
 @Entity
-class TFlipFlop():
+class tFlipFlop():
     is_component = True
-    name = "TFlipFlop"
+    name = "tFlipFlop"
     inputs = [Input("clock", Std_logic()), Input("t", Std_logic())]
     outputs = [Output("q", Std_logic())]
 
