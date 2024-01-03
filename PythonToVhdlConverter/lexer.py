@@ -170,12 +170,27 @@ def generate_tokens(text):
 def parse_text(text):
     tokens = generate_tokens(text)
     parsed_text = []
-    
+    find_qout = False
+    qout_text = ''
     for item in tokens:
-        if type(item) == str:
-            parsed_text.append(item)
+        if not find_qout:
+            if type(item) == str:
+                parsed_text.append(item)
+            elif item.__repr__() == "'" or item.__repr__() == '"':
+                qout_text += item.__repr__()
+                find_qout = True
+            else:
+                parsed_text.append(item.__repr__())
         else:
-            parsed_text.append(item.__repr__())
+            if type(item) == str:
+                qout_text += item
+            elif item.__repr__() == "'" or item.__repr__() == '"':
+                qout_text += item.__repr__()
+                find_qout = False
+                parsed_text.append(qout_text)
+                qout_text = ""
+            else:
+                qout_text += item.__repr__()
             
     return " ".join(parsed_text)
 
