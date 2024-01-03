@@ -39,21 +39,20 @@ def logic():
     seven_segment_patterns[7] = " 0001111 "
     seven_segment_patterns[8] = " 0000000 "
     seven_segment_patterns[9] = " 0000100 "
-
+    @process
     def process( clk , rst ):
         if rst == '1':
-                count = 0
+            count = 0
 
         elif rising_edge(clk):
-             if count == 9 :
-                  count = 0
-             else:
-                  count = count + 1
-        else:
-             0          
+            if count == 9 :
+                count = 0
+            else:
+                count = count + 1
+               
 
-        seg = seven_segment_patterns[count]
-        anode = demux_output    
+    seg = seven_segment_patterns[count]
+    anode = demux_output    
 
 
         

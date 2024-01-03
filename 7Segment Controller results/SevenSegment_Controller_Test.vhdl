@@ -3,32 +3,33 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity Mux is
+entity _7segController is
 port(
-	A : in std_logic;
-	C : in integer range 0 to 9;
-	F : in integer;
+	clk : in std_logic;
+	rst : in std_logic;
+	number : in std_logic_vector(3 downto 0);
 	
-	B : out std_logic
+	seg : out std_logic_vector(6 downto 0);
+	anode : out std_logic_vector(3 downto 0)
 );
-end Mux;
-architecture behavior of Mux is
-	component mux4x1 is
+end _7segController;
+architecture behavior of _7segController is
+	component deMux1x4 is
 	port(
-		inp0 : in std_logic;
-		inp1 : in std_logic;
-		inp2 : in std_logic;
-		inp3 : in std_logic;
+		inp : in std_logic;
 		select : in std_logic_vector(1 downto 0);
 		
-		opt : out std_logic
+		opt0 : out std_logic;
+		opt1 : out std_logic;
+		opt2 : out std_logic;
+		opt3 : out std_logic
 	);
 	end component;
 
-	signal D : std_logic_vector(2 downto 0);
-	signal E : std_logic;
+	signal count : integer range 0 to 9;
+	signal demux_output : std_logic_vector(3 downto 0);
 
-	constant seven_segement_pattern : array ( 0 to 9 ) of std_logic_vector(6 downto 0);
+	constant seven_segment_patterns : array ( 0 to 9 ) of std_logic_vector(6 downto 0);
 
 	begin
 		count <= 0 ;
@@ -43,7 +44,7 @@ architecture behavior of Mux is
 		seven_segment_patterns ( 7 ) <= " 0001111 " ;
 		seven_segment_patterns ( 8 ) <= " 0000000 " ;
 		seven_segment_patterns ( 9 ) <= " 0000100 " ;
-		process (clk,rst)
+		process ( clk , rst )
 			if rst = ' 1 ' then
 					count <= 0 ;
 			elsif rising_edge ( clk ) then
@@ -52,10 +53,10 @@ architecture behavior of Mux is
 					else
 							count <= count + 1 ;
 					end if;
-			else
-					0 ;
 			end if;
 		
 		end process;
+		seg <= seven_segment_patterns ( count ) ;
+		anode <= demux_output ;
 
 	end behavior;
