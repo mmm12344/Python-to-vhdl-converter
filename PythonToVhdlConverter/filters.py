@@ -228,7 +228,7 @@ class If_condition_filter:
         self.lines = lines
         self.if_regex_exp = "\s*if (.+):$"
         self.elif_regex_exp = "\s*elif (.+):$"
-        self.else_regex_exp = "\s*else :$"
+        self.else_regex_exp = "\s*else(.*):$"
         self.tokens = []
         self.tokenize()
     
