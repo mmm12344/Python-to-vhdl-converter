@@ -7,6 +7,15 @@ def style(block):
     styled[1:] = block.splitlines(True)
     return "\t".join(styled)
 
+class Packages:
+    def __init__(self):
+        pass
+    def get_Packages(self):
+        return "library IEEE;\nuse IEEE.STD_LOGIC_1164.ALL;\nuse IEEE.STD_LOGIC_ARITH.ALL;\nuse IEEE.STD_LOGIC_UNSIGNED.ALL;"
+
+
+
+
 class Entity():
     """
     A class representing an entity.
@@ -28,8 +37,11 @@ class Entity():
         try:
             if self.entity_class.is_component:
                 components.append(self)
+                
+          
         except:
             pass
+
     def convert_entity(self):
         """
         Converts class (entity) to VHDL code.
@@ -40,7 +52,7 @@ class Entity():
         Returns:
             str: VHDL code for an entity.
         """
-        return f"entity {self.entity_class.name} is\nport(\n{self.create_port()}\n);\nend {self.entity_class.name};"
+        return f"{Packages().get_Packages()}\n\nentity {self.entity_class.name} is\nport(\n{self.create_port()}\n);\nend {self.entity_class.name};"
     def create_port(self):
         """
         Creates VHDL port.
@@ -76,6 +88,14 @@ class Architecture():
         """
         self.file_name = architecture_class.path.split("\\")[-1].split(".")[0]
         self.architecture_class = architecture_class
+        self.entity_name = architecture_class.entity.entity_class.name
+        try:
+            if self.architecture_class.entity.entity_class.is_component:
+                self.is_component = True
+            else:
+                self.is_component = False
+        except:
+            self.is_component = False
         files[-1]["architicture"] = self
     def convert_arch(self):
         """
@@ -87,7 +107,11 @@ class Architecture():
         Returns:
             str: The VHDL code for an architecture with signals.
         """
-        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{style(CreateComponents().convert_component())}\n{self.create_signals()}\n{self.create_constants()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend {self.architecture_class.name};"
+        if not self.is_component:
+            components_to_add = CreateComponents().convert_component()
+        else:
+            components_to_add = ''
+        return f"architecture {self.architecture_class.name} of {self.entity_name} is\n{style(components_to_add)}\n{self.create_signals()}\n{self.create_constants()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend {self.architecture_class.name};"
     def create_signals(self):
         """
         Creates VHDL signals.
@@ -119,9 +143,11 @@ class CreateComponents:
 
     def convert_component(self):
         result = ""
+      
         for component in components:
             result += f"component {component.entity_class.name} is\nport(\n{self.create_port(component)}\n);\nend component;\n"
         return result
+       
     def create_port(self, component):
         """
         Creates VHDL port.

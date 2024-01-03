@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity_name = "dFlipFlop"
+    entity = DFlipFlop
 
 @logic
 def logic():

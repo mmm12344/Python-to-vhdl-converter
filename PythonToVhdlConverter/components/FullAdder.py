@@ -16,7 +16,7 @@ class Arch():
     path = __file__  
     signals = [Signal("x1", Std_logic()), Signal("x2", Std_logic()),Signal("x3", Std_logic())]
     name = "behavior"
-    entity_name = "FullAdder"
+    entity = FullAdder
 
 
 @logic

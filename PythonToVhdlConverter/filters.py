@@ -96,18 +96,24 @@ class Capture:
         return False
     
     def capture_if(self):
+        if_regex_exp = "\s*if (.+):$"
         else_regex_exp = "\s*else :$"
         if_block_lines = []
+        if_counter = 0
         found_else = False
+        else_counter = 0
         else_line = ""
         
         while self.current_line != None:
+            if re.match(if_regex_exp, self.current_line):
+                if_counter += 1
             
-            if found_else and (not self.is_child(else_line, self.current_line)):
+            if found_else and (if_counter == else_counter) and (not self.is_child(else_line, self.current_line)):
                 break
             if re.match(else_regex_exp, self.current_line):
                 found_else = True
                 else_line = self.current_line
+                else_counter += 1
     
             if_block_lines.append(self.current_line)
 
@@ -227,20 +233,39 @@ class If_condition_filter:
         self.tokenize()
     
     def tokenize(self):
-        for line in self.lines:
-            if_match = re.match(self.if_regex_exp, line)
-            elif_match = re.match(self.elif_regex_exp, line)
-            else_match = re.match(self.else_regex_exp, line)
-            if if_match:
+        inside_block = False
+        parentLine = self.lines[0]
+        index = 0
+        
+        while index < len(self.lines):
+            if_match = re.match(self.if_regex_exp, self.lines[index])
+            elif_match = re.match(self.elif_regex_exp, self.lines[index])
+            else_match = re.match(self.else_regex_exp, self.lines[index])
+            if if_match and (inside_block == False):
+                inside_block = True
+                parentLine = self.lines[index]
                 token = Condition_token(if_type, if_match.group(1))
-            elif elif_match:
+            elif elif_match and (inside_block == False):
+                inside_block = True
+                parentLine = self.lines[index]
                 token = Condition_token(elif_type, elif_match.group(1))
-            elif else_match:
+            elif else_match and (inside_block == False):
+                inside_block = True
+                parentLine = self.lines[index]
                 token = Condition_token(else_type)
             else:
-                self.tokens[-1].add_statement(Statement_filter(line))
+                to_capture = []
+                
+                while ((index + 1) <= len(self.lines)) and ((len(parentLine) - len(parentLine.lstrip())) < (len(self.lines[index]) - len(self.lines[index].lstrip()))):
+                    to_capture.append(self.lines[index])
+                    index+=1
+
+                self.tokens[-1].add_statement(Capture(to_capture))
+                inside_block = False
+                
                 continue
             self.tokens.append(token)
+            index += 1
 
     def parse(self):
         parsed_block = ""
