@@ -23,13 +23,13 @@ def logic():
     def process(inp0,inp1,inp2,inp3,s):
         match s:
             case " 00 " :
-             opt = inp0
+                opt = inp0
             case  " 01 " :
-             opt = inp1
+                opt = inp1
             case  " 10 "  :
-             opt = inp2
+                opt = inp2
             case  " 11 "  :
-             opt = inp3
+                opt = inp3
 
   
 

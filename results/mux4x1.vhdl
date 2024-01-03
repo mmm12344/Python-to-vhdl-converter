@@ -9,7 +9,7 @@ port(
 	inp1 : in std_logic;
 	inp2 : in std_logic;
 	inp3 : in std_logic;
-	select : in std_logic_vector(1 downto 0);
+	s : in std_logic_vector(1 downto 0);
 	
 	opt : out std_logic
 );
@@ -19,9 +19,9 @@ architecture behavior of mux4x1 is
 
 
 	begin
-		process (inp0,inp1,inp2,inp3,select)
+		process (inp0,inp1,inp2,inp3,s)
 		begin
-			case select is
+			case s is
 				when " 00 " =>
 					opt <= inp0 ;
 				when " 01 " =>

@@ -97,7 +97,7 @@ class Capture:
     
     def capture_if(self):
         if_regex_exp = "\s*if (.+):$"
-        else_regex_exp = "\s*else :$"
+        else_regex_exp = "\s*else(.*):$"
         if_block_lines = []
         if_counter = 0
         found_else = False
@@ -256,12 +256,14 @@ class If_condition_filter:
             else:
                 to_capture = []
                 
+               
                 while ((index + 1) <= len(self.lines)) and ((len(parentLine) - len(parentLine.lstrip())) < (len(self.lines[index]) - len(self.lines[index].lstrip()))):
                     to_capture.append(self.lines[index])
                     index+=1
 
                 self.tokens[-1].add_statement(Capture(to_capture))
                 inside_block = False
+                
                 
                 continue
             self.tokens.append(token)

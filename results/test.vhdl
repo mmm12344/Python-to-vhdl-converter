@@ -19,9 +19,20 @@ architecture behavior of Mux is
 		inp1 : in std_logic;
 		inp2 : in std_logic;
 		inp3 : in std_logic;
-		select : in std_logic_vector(1 downto 0);
+		s : in std_logic_vector(1 downto 0);
 		
 		opt : out std_logic
+	);
+	end component;
+	component deMux1x4 is
+	port(
+		inp : in std_logic;
+		s : in std_logic_vector(1 downto 0);
+		
+		opt0 : out std_logic;
+		opt1 : out std_logic;
+		opt2 : out std_logic;
+		opt3 : out std_logic
 	);
 	end component;
 
@@ -43,19 +54,25 @@ architecture behavior of Mux is
 		seven_segment_patterns ( 7 ) <= " 0001111 " ;
 		seven_segment_patterns ( 8 ) <= " 0000000 " ;
 		seven_segment_patterns ( 9 ) <= " 0000100 " ;
-		process ( clk , rst )
+		process (clock)
 		begin
-			if rst = ' 1 ' then
-					count <= 0 ;
-			elsif rising_edge ( clk ) then
-					if count = 9 then
-							count <= 0 ;
-					else
-							count <= count + 1 ;
-					end if;
+			qmario <= TMP ;
+		
+			qkdjfksjf <= not TMP ;
+		
+			if j = ' 0 ' and k = ' 0 ' then
+					TMP <= TMP ;
+			elsif j = ' 1 ' and k = ' 1 ' then
+					TMP <= not TMP ;
+			elsif j = ' 0 ' and k = ' 1 ' then
+					TMP <= ' 0 ' ;
 			else
-					0 ;
+					TMP <= ' 1 ' ;
 			end if;
+		
+			qmario <= TMP ;
+		
+			qkdjfksjf <= not TMP ;
 		
 		end process;
 
