@@ -24,12 +24,12 @@ def logic():
     def process(clock):
         if rising_edge(clock):
             if j == '0' and k == '0' :
-                    TMP = TMP
+                TMP = TMP
             elif j == '1' and k == '1' :
-                 TMP = not TMP
+                TMP = not TMP
             elif j == '0' and k == '1' : 
-                     TMP = '0'
-            else :
-                 TMP = '1'
+                TMP = '0'
+            else:
+                TMP = '1'
         q = TMP
         q = not TMP     

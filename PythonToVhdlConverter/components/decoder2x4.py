@@ -24,11 +24,11 @@ def logic():
     def process(inp):
         match inp:
             case " 00 " :
-             opt = "0001"
+                opt = "0001"
             case  " 01 " :
-             opt = "0010"
+                opt = "0010"
             case  " 10 "  :
-             opt = "0100"
+                opt = "0100"
             case  " 11 "  :
-             opt = "1000"
+                opt = "1000"
         

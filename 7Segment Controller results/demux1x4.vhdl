@@ -6,7 +6,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity deMux1x4 is
 port(
 	inp : in std_logic;
-	select : in std_logic_vector(1 downto 0);
+	s : in std_logic_vector(1 downto 0);
 	
 	opt0 : out std_logic;
 	opt1 : out std_logic;
@@ -19,8 +19,9 @@ architecture behavior of deMux1x4 is
 
 
 	begin
-		process (inp, select)
-			case select is
+		process (inp, s)
+		begin
+			case s is
 				when " 00 " =>
 					opt0 <= inp ;
 					opt1 <= ' 0 ' ;

@@ -3,21 +3,31 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity _7segController is
+entity Mux is
 port(
-	clk : in std_logic;
-	rst : in std_logic;
-	number : in std_logic_vector(3 downto 0);
+	A : in std_logic;
+	C : in integer range 0 to 9;
+	F : in integer;
 	
-	seg : out std_logic_vector(6 downto 0);
-	anode : out std_logic_vector(3 downto 0)
+	B : out std_logic
 );
-end _7segController;
-architecture behavior of _7segController is
+end Mux;
+architecture behavior of Mux is
+	component mux4x1 is
+	port(
+		inp0 : in std_logic;
+		inp1 : in std_logic;
+		inp2 : in std_logic;
+		inp3 : in std_logic;
+		s : in std_logic_vector(1 downto 0);
+		
+		opt : out std_logic
+	);
+	end component;
 	component deMux1x4 is
 	port(
 		inp : in std_logic;
-		select : in std_logic_vector(1 downto 0);
+		s : in std_logic_vector(1 downto 0);
 		
 		opt0 : out std_logic;
 		opt1 : out std_logic;
@@ -26,10 +36,10 @@ architecture behavior of _7segController is
 	);
 	end component;
 
-	signal count : integer range 0 to 9;
-	signal demux_output : std_logic_vector(3 downto 0);
+	signal D : std_logic_vector(2 downto 0);
+	signal E : std_logic;
 
-	constant seven_segment_patterns : array ( 0 to 9 ) of std_logic_vector(6 downto 0);
+	constant seven_segement_pattern : array ( 0 to 9 ) of std_logic_vector(6 downto 0);
 
 	begin
 		count <= 0 ;
@@ -44,19 +54,45 @@ architecture behavior of _7segController is
 		seven_segment_patterns ( 7 ) <= " 0001111 " ;
 		seven_segment_patterns ( 8 ) <= " 0000000 " ;
 		seven_segment_patterns ( 9 ) <= " 0000100 " ;
-		process ( clk , rst )
-			if rst = ' 1 ' then
-					count <= 0 ;
-			elsif rising_edge ( clk ) then
-					if count = 9 then
-							count <= 0 ;
+		process (clock)
+		begin
+			qmario <= TMP ;
+		
+			qkdjfksjf <= not TMP ;
+		
+			if j = ' 0 ' and k = ' 0 ' then
+					TMP <= TMP ;
+			elsif j = ' 1 ' and k = ' 1 ' then
+					TMP <= not TMP ;
+			elsif j = ' 0 ' and k = ' 1 ' then
+					TMP <= ' 0 ' ;
+			else
+					TMP <= ' 1 ' ;
+			end if;
+		
+			qmario <= TMP ;
+		
+			qkdjfksjf <= not TMP ;
+		
+		end process;
+		process (clock)
+		begin
+			if rising_edge ( clock ) then
+					if j = ' 0 ' and k = ' 0 ' then
+							TMP <= TMP ;
+					elsif j = ' 1 ' and k = ' 1 ' then
+							TMP <= not TMP ;
+					elsif j = ' 0 ' and k = ' 1 ' then
+							TMP <= ' 0 ' ;
 					else
-							count <= count + 1 ;
+							TMP <= ' 1 ' ;
 					end if;
 			end if;
 		
+			q <= TMP ;
+		
+			q <= not TMP ;
+		
 		end process;
-		seg <= seven_segment_patterns ( count ) ;
-		anode <= demux_output ;
 
 	end behavior;

@@ -97,24 +97,16 @@ class Capture:
     
     def capture_if(self):
         if_regex_exp = "\s*if (.+):$"
-        else_regex_exp = "\s*else :$"
+        elif_regex_exp = "\s*elif (.+):$"
+        else_regex_exp = "\s*else(.*):$"
         if_block_lines = []
-        if_counter = 0
-        found_else = False
-        else_counter = 0
-        else_line = ""
-        
+        if_line = self.current_line
+        if_block_lines.append(if_line)
+        self.advance()
         while self.current_line != None:
-            if re.match(if_regex_exp, self.current_line):
-                if_counter += 1
             
-            if found_else and (if_counter == else_counter) and (not self.is_child(else_line, self.current_line)):
+            if not self.is_child(if_line, self.current_line) and not re.match(elif_regex_exp, self.current_line) and not re.match(else_regex_exp, self.current_line):
                 break
-            if re.match(else_regex_exp, self.current_line):
-                found_else = True
-                else_line = self.current_line
-                else_counter += 1
-    
             if_block_lines.append(self.current_line)
 
             self.advance()
@@ -209,7 +201,7 @@ class Process_filter:
         self.tokens = Capture(self.lines[1:]).get_tokens()
     
     def parse(self):
-        parsed_block = f"process ({self.sensitivity_list})\n"
+        parsed_block = f"process ({self.sensitivity_list})\nbegin\n"
         for token in self.tokens:
             parsed_block += token.parse() + "\n"
         parsed_block += "end process;\n"
@@ -256,12 +248,14 @@ class If_condition_filter:
             else:
                 to_capture = []
                 
+               
                 while ((index + 1) <= len(self.lines)) and ((len(parentLine) - len(parentLine.lstrip())) < (len(self.lines[index]) - len(self.lines[index].lstrip()))):
                     to_capture.append(self.lines[index])
                     index+=1
 
                 self.tokens[-1].add_statement(Capture(to_capture))
                 inside_block = False
+                
                 
                 continue
             self.tokens.append(token)
