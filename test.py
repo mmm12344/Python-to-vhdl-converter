@@ -2,7 +2,7 @@ from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal,
 from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector, Integer, Array
 from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
-from PythonToVhdlConverter.components import mux4x1, JKFlipFlop, demux1x4
+
 import time
 
 @Entity
@@ -37,11 +37,41 @@ def logic():
     a2 = 2
     
     if mario == 1:
-        x = 0
-    elif  mario == 2:
-        x = 2
+        if  mario == 2:
+            x = 2
+            if v == 3:
+                x = 10
+            else :
+                x = 9
+        elif mario == 4:
+            x = 3
+            if v == 3:
+                x = 10
+            else :
+                x = 9
+        else :
+            x = 3
+            if v == 3:
+                x = 10
+                while i < 4:
+                    mario = 1
+                    while i < 4:
+                        mario = 1
+
+                    for i in range(1, 10):
+                        i = 1
+            else :
+                x = 9
+    elif mario == 4:
+            x = 3
     else :
         x = 1
+        if v == 3:
+            x = 10
+        elif mario == 1:
+            omar = 3
+        else :
+            x = 9
         
     A = not c
   
@@ -67,6 +97,10 @@ def logic():
                 mario = 1
                 for i in range(1, 10):
                     i = 1
+                    if v == 3:
+                        x = 10
+                    else :
+                        x = 0
         i = 5
 
     match i:
@@ -86,8 +120,20 @@ def logic():
         
         while i < 4:
             mario = 1
+            if v == 3:
+                x = 10
+                if v == 3:
+                    x = 10
+                else :
+                    x = 9
+            else :
+                x = 9
         for i in range(1, 10):
             i = 1
+            if v == 3:
+                x = 10
+            else :
+                x = 9
         
     @process
     def process(x, y):
@@ -95,6 +141,10 @@ def logic():
             x = 0
         elif mario * 2 > 2 :
             x = 2
+            if v == 3:
+                x = 10
+            else :
+                x = 9
         else :
             y = 0
 
@@ -106,6 +156,10 @@ def logic():
 
         while mario < 5:
             i = 4
+            if v == 3:
+                x = 10
+            else :
+                x = 9
             
         mario = 5 * 20 |xnor| 1
 

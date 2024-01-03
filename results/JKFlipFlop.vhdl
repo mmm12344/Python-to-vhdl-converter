@@ -1,3 +1,4 @@
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
@@ -37,3 +38,4 @@ architecture behavior of JKFlipFlop is
 		end process;
 
 	end behavior;
+

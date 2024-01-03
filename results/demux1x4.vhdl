@@ -1,3 +1,4 @@
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
@@ -15,7 +16,6 @@ port(
 );
 end deMux1x4;
 architecture behavior of deMux1x4 is
-
 
 
 	begin
