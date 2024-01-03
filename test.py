@@ -6,10 +6,10 @@ from PythonToVhdlConverter.components import mux4x1, JKFlipFlop, demux1x4
 import time
 
 @Entity
-class Mux():
+class mux4x1ux():
     name = "Mux"
-    inputs = [Input("A", Std_logic())]
-    outputs = [Output("B", Std_logic())]
+    inputs = [Input("S", Std_logic())]
+    outputs = [Output("F", Std_logic())]
  
 @Architecture     
 class Arch():
