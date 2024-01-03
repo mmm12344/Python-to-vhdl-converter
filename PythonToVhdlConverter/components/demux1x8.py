@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity = DeMux1x8
+    entity = deMux1x8
 
 @logic
 def logic():

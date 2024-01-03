@@ -6,7 +6,7 @@ from PythonToVhdlConverter.components import demux1x4
 import time
 
 @Entity
-class _7segController ():
+class _7segController():
     name = "_7segController"
     inputs = [Input("clk", Std_logic()),Input("rst", Std_logic()),Input("number", Std_logic_vector(4))]
     outputs = [Output("seg", Std_logic_vector(7)),Output("anode", Std_logic_vector(4))]
@@ -22,7 +22,7 @@ class Arch():
     """
     constants = [Constant( "seven_segment_patterns" ,Array(0, 9, Std_logic_vector(7)))]
     name = "behavior"
-    entity_name = "_7segController"
+    entity = _7segController
                
 @logic
 def logic():
@@ -49,6 +49,8 @@ def logic():
                   count = 0
              else:
                   count = count + 1
+        else:
+             0          
 
         seg = seven_segment_patterns[count]
         anode = demux_output    

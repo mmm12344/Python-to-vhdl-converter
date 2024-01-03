@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity = Mux
+    entity = mux4x1
 @logic
 def logic():
     @process
