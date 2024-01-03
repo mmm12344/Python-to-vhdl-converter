@@ -35,6 +35,16 @@ architecture behavior of Mux is
 		opt3 : out std_logic
 	);
 	end component;
+	component JKFlipFlop is
+	port(
+		clock : in std_logic;
+		j : in std_logic;
+		k : in std_logic;
+		
+		q : out std_logic;
+		qb : out std_logic
+	);
+	end component;
 
 	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
@@ -43,31 +53,31 @@ architecture behavior of Mux is
 
 	begin
 		count <= 0 ;
-		demux_output <= " 0000 " ;
-		seven_segment_patterns ( 0 ) <= " 0000001 " ;
-		seven_segment_patterns ( 1 ) <= " 1001111 " ;
-		seven_segment_patterns ( 2 ) <= " 0010010 " ;
-		seven_segment_patterns ( 3 ) <= " 0000110 " ;
-		seven_segment_patterns ( 4 ) <= " 1001100 " ;
-		seven_segment_patterns ( 5 ) <= " 0100100 " ;
-		seven_segment_patterns ( 6 ) <= " 0100000 " ;
-		seven_segment_patterns ( 7 ) <= " 0001111 " ;
-		seven_segment_patterns ( 8 ) <= " 0000000 " ;
-		seven_segment_patterns ( 9 ) <= " 0000100 " ;
+		demux_output <= "0000" ;
+		seven_segment_patterns ( 0 ) <= "0000001" ;
+		seven_segment_patterns ( 1 ) <= "1001111" ;
+		seven_segment_patterns ( 2 ) <= "0010010" ;
+		seven_segment_patterns ( 3 ) <= "0000110" ;
+		seven_segment_patterns ( 4 ) <= "1001100" ;
+		seven_segment_patterns ( 5 ) <= "0100100" ;
+		seven_segment_patterns ( 6 ) <= "0100000" ;
+		seven_segment_patterns ( 7 ) <= "0001111" ;
+		seven_segment_patterns ( 8 ) <= "0000000" ;
+		seven_segment_patterns ( 9 ) <= "0000100" ;
 		process (clock)
 		begin
 			qmario <= TMP ;
 		
 			qkdjfksjf <= not TMP ;
 		
-			if j = ' 0 ' and k = ' 0 ' then
+			if j = '0' and k = '0' then
 					TMP <= TMP ;
-			elsif j = ' 1 ' and k = ' 1 ' then
+			elsif j = '1' and k = '1' then
 					TMP <= not TMP ;
-			elsif j = ' 0 ' and k = ' 1 ' then
-					TMP <= ' 0 ' ;
+			elsif j = '0' and k = '1' then
+					TMP <= '0' ;
 			else
-					TMP <= ' 1 ' ;
+					TMP <= '1' ;
 			end if;
 		
 			qmario <= TMP ;
@@ -78,14 +88,14 @@ architecture behavior of Mux is
 		process (clock)
 		begin
 			if rising_edge ( clock ) then
-					if j = ' 0 ' and k = ' 0 ' then
+					if j = '0' and k = '0' then
 							TMP <= TMP ;
-					elsif j = ' 1 ' and k = ' 1 ' then
+					elsif j = '1' and k = '1' then
 							TMP <= not TMP ;
-					elsif j = ' 0 ' and k = ' 1 ' then
-							TMP <= ' 0 ' ;
+					elsif j = '0' and k = '1' then
+							TMP <= '0' ;
 					else
-							TMP <= ' 1 ' ;
+							TMP <= '1' ;
 					end if;
 			end if;
 		

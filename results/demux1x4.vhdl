@@ -22,25 +22,25 @@ architecture behavior of deMux1x4 is
 		process (inp, s)
 		begin
 			case s is
-				when " 00 " =>
+				when "00" =>
 					opt0 <= inp ;
-					opt1 <= ' 0 ' ;
-					opt2 <= ' 0 ' ;
-					opt3 <= ' 0 ' ;
-				when " 01 " =>
-					opt0 <= ' 0 ' ;
+					opt1 <= '0' ;
+					opt2 <= '0' ;
+					opt3 <= '0' ;
+				when "01" =>
+					opt0 <= '0' ;
 					opt1 <= inp ;
-					opt2 <= ' 0 ' ;
-					opt3 <= ' 0 ' ;
-				when " 10 " =>
-					opt0 <= ' 0 ' ;
-					opt1 <= ' 0 ' ;
+					opt2 <= '0' ;
+					opt3 <= '0' ;
+				when "10" =>
+					opt0 <= '0' ;
+					opt1 <= '0' ;
 					opt2 <= inp ;
-					opt3 <= ' 0 ' ;
-				when " 11 " =>
-					opt0 <= ' 0 ' ;
-					opt1 <= ' 0 ' ;
-					opt2 <= ' 0 ' ;
+					opt3 <= '0' ;
+				when "11" =>
+					opt0 <= '0' ;
+					opt1 <= '0' ;
+					opt2 <= '0' ;
 					opt3 <= inp ;
 			end case;
 		
