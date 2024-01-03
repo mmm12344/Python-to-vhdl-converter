@@ -236,7 +236,7 @@ class If_condition_filter:
         inside_block = False
         parentLine = self.lines[0]
         index = 0
-        print(len(self.lines))
+        
         while index < len(self.lines):
             if_match = re.match(self.if_regex_exp, self.lines[index])
             elif_match = re.match(self.elif_regex_exp, self.lines[index])

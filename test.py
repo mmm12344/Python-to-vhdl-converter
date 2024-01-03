@@ -2,7 +2,7 @@ from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal,
 from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector, Integer, Array
 from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
-
+from PythonToVhdlConverter.components import mux4x1
 import time
 
 @Entity
