@@ -23,6 +23,7 @@ architecture behavior of deMux1x4 is
 	end component;
 
 
+
 	begin
 		process (inp, select)
 			case select is
