@@ -14,12 +14,13 @@ class JKFlipFlop():
 @Architecture
 class Arch():
     path = __file__
-    signals = []
+    signals = [Signal("TMP", Std_logic())]
     name = "behavior"
     entity = JKFlipFlop
 
 @logic
 def logic():
+    TMP == '0'
     @process
     def process(clock):
         if rising_edge(clock):
@@ -32,4 +33,4 @@ def logic():
             else:
                 TMP = '1'
         q = TMP
-        q = not TMP     
+        qb = not TMP     

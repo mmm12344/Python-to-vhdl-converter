@@ -5,7 +5,7 @@ from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, log
 import time
 
 @Entity
-class Decoder3x8():
+class decoder3x8():
     is_component = True
     name = "decoder3x8"
     inputs = [Input("inp", Std_logic_vector(3))]
@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity = Decoder3x8
+    entity = decoder3x8
 
 @logic
 def logic():
