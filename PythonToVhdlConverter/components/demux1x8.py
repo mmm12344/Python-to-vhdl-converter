@@ -8,7 +8,7 @@ import time
 class DeMux1x8():
     is_component = True
     name = "deMux1x8"
-    inputs = [Input("inp", Std_logic()), Input("select", Std_logic_vector(3))]
+    inputs = [Input("inp", Std_logic()), Input("s", Std_logic_vector(3))]
     outputs = [Output("opt0", Std_logic()), Output("opt1", Std_logic()), Output("opt2", Std_logic()), Output("opt3", Std_logic()), Output("opt4", Std_logic()), Output("opt5", Std_logic()), Output("opt6", Std_logic()), Output("opt7", Std_logic())]
 
 @Architecture
@@ -21,8 +21,8 @@ class Arch():
 @logic
 def logic():
     @process
-    def process(inp, select):
-        match select:
+    def process(inp, s):
+        match s:
             case "000":
                 opt0 = inp
                 opt1 = '0'

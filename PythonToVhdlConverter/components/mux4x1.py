@@ -8,7 +8,7 @@ import time
 class Mux():
     is_component = True
     name = "mux4x1"
-    inputs = [Input("inp0", Std_logic()),Input("inp1", Std_logic()),Input("inp2", Std_logic()),Input("inp3", Std_logic()),Input("select", Std_logic_vector(2))] 
+    inputs = [Input("inp0", Std_logic()),Input("inp1", Std_logic()),Input("inp2", Std_logic()),Input("inp3", Std_logic()),Input("s", Std_logic_vector(2))] 
     outputs = [Output("opt", Std_logic())]
 
 @Architecture   
@@ -20,8 +20,8 @@ class Arch():
 @logic
 def logic():
     @process
-    def process(inp0,inp1,inp2,inp3,select):
-        match select:
+    def process(inp0,inp1,inp2,inp3,s):
+        match s:
             case " 00 " :
              opt = inp0
             case  " 01 " :
