@@ -1,3 +1,8 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
 entity Mux is
 port(
 	A : in std_logic;
@@ -44,9 +49,15 @@ architecture behavior of Mux is
 	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
 
-	constant mario : array ( 0 to 9 ) of std_logic_vector(9 downto 0);
+	constant seven_segement_pattern : array ( 0 to 9 ) of std_logic_vector(6 downto 0);
 
 	begin
+		seven_segement_pattern ( 0 ) <= " 0000001 " ;
+		seven_segement_pattern ( 1 ) <= " 343454534 " ;
+		seven_segement_pattern ( 2 ) <= " 343454534 " ;
+		seven_segement_pattern ( 3 ) <= " 343454534 " ;
+		seven_segement_pattern ( 4 ) <= " 343454534 " ;
+		seven_segement_pattern ( 5 ) <= " 343454534 " ;
 		a <= b + a ;
 		b <= b sll 1 srl 2 ;
 		a ( 0 ) = " 10 " ;

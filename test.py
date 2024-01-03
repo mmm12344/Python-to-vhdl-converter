@@ -15,14 +15,19 @@ class Mux():
 class Arch():
     path = __file__
     signals = [Signal("D", Std_logic_vector(3)), Signal("E", Std_logic())]
-    constants = [Constant( "mario" ,Array(0, 9, Std_logic_vector(10)))]
+    constants = [Constant( "seven_segement_pattern" ,Array(0, 9, Std_logic_vector(7)))]
     name = "behavior"
-    entity_name = "Mux"
+    entity = Mux
                
 @logic
 def logic():
     
-    
+    seven_segement_pattern[0] = "0000001"
+    seven_segement_pattern[1] = "343454534"
+    seven_segement_pattern[2] = "343454534"
+    seven_segement_pattern[3] = "343454534"
+    seven_segement_pattern[4] = "343454534"
+    seven_segement_pattern[5] = "343454534"
     
     a = b + a
     b = b << 1 >> 2
