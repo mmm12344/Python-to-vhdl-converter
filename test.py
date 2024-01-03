@@ -53,6 +53,26 @@ def logic():
             TMP = '1'
         qmario = TMP
         qkdjfksjf = not TMP 
+
+        mario = 9
+
+        match (mario):
+            case 2:
+                y = 4
+                match (mario):
+                    case 1:
+                        y = 4
+                    case 4:
+                        x = 2
+            case 4:
+                match (mario):
+                    case 1:
+                        y = 4
+                    case 4:
+                        x = 2
+                x = 2
+
+
         
     @process
     def process(clock):

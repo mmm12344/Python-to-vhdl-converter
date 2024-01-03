@@ -23,13 +23,13 @@ architecture behavior of mux4x1 is
 		begin
 			case s is
 				when " 00 " =>
-					opt <= inp0 ;
+						opt <= inp0 ;
 				when " 01 " =>
-					opt <= inp1 ;
+						opt <= inp1 ;
 				when " 10 " =>
-					opt <= inp2 ;
+						opt <= inp2 ;
 				when " 11 " =>
-					opt <= inp3 ;
+						opt <= inp3 ;
 			end case;
 		
 		end process;

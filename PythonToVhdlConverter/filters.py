@@ -123,7 +123,7 @@ class Capture:
                 break
             match_case_block_lines.append(self.current_line)
             self.advance()
-        
+
         return match_case_block_lines
     
     def capture_for(self):
@@ -293,19 +293,35 @@ class Match_Case_Condition_Filter:
         pass
 
     def tokenize(self):
-        for line in self.lines:
-            match_case_match = re.match(self.match_case_regex_exp, line)
-            case_match = re.match(self.case_regex_exp, line)
+        index = 0
+        parent_line = self.lines[0]
+        found_match = False
+        
+        while index < len(self.lines):
+            match_case_match = re.match(self.match_case_regex_exp, self.lines[index])
+            case_match = re.match(self.case_regex_exp, self.lines[index])
 
-            if match_case_match:
+            if match_case_match and (found_match == False):
+                parent_line = self.lines[index]
+                found_match = True
                 token = Match_Case_Token("match", match_case_match.group(1), None)
-                self.tokens.append(token)
             elif case_match:
+                parent_line = self.lines[index]
+                found_match = True
                 token = Match_Case_Token("case", None, case_match.group(1))
-                self.tokens.append(token)
             else:
-                self.tokens[-1].add_statement(Statement_filter(line))
+                to_capture = []
+                
+                while ((index + 1) <= len(self.lines)) and ((len(parent_line) - len(parent_line.lstrip())) < (len(self.lines[index]) - len(self.lines[index].lstrip()))):
+                    to_capture.append(self.lines[index])
+                    index+=1
+
+                self.tokens[-1].add_statement(Capture(to_capture))
+                found_match = False                
                 continue
+
+            self.tokens.append(token)
+            index += 1
 
         
     def parse(self):

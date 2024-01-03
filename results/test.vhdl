@@ -74,6 +74,27 @@ architecture behavior of Mux is
 		
 			qkdjfksjf <= not TMP ;
 		
+			mario <= 9 ;
+		
+			case ( mario ) is
+				when 2 =>
+						y <= 4 ;
+						case ( mario ) is
+							when 1 =>
+									y <= 4 ;
+							when 4 =>
+									x <= 2 ;
+						end case;
+				when 4 =>
+						case ( mario ) is
+							when 1 =>
+									y <= 4 ;
+							when 4 =>
+									x <= 2 ;
+						end case;
+						x <= 2 ;
+			end case;
+		
 		end process;
 		process (clock)
 		begin
