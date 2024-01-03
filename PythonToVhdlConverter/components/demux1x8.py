@@ -94,4 +94,4 @@ def logic():
                 opt4 = '0'
                 opt5 = '0'
                 opt6 = '0'
-                opt7 = inp
+                opt7 = inp 
