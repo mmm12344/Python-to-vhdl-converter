@@ -1,4 +1,4 @@
-entity DeMux1x4 is
+entity deMux1x4 is
 port(
 	inp : in std_logic;
 	select : in std_logic_vector(1 downto 0);
@@ -8,9 +8,9 @@ port(
 	opt2 : out std_logic;
 	opt3 : out std_logic
 );
-end DeMux1x4;
-architecture behavior of DeMux1x4 is
-	component Mux4x1 is
+end deMux1x4;
+architecture behavior of deMux1x4 is
+	component mux4x1 is
 	port(
 		inp0 : in std_logic;
 		inp1 : in std_logic;
@@ -31,7 +31,7 @@ architecture behavior of DeMux1x4 is
 		qb : out std_logic
 	);
 	end component;
-	component DeMux1x4 is
+	component deMux1x4 is
 	port(
 		inp : in std_logic;
 		select : in std_logic_vector(1 downto 0);
