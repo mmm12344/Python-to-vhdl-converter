@@ -1,8 +1,8 @@
-from .data_types import Bit, Std_logic, Std_logic_vector
+from .data_types import Bit, Std_logic, Std_logic_vector, Integer, Array
 
 
 
-data_types = [Bit, Std_logic, Std_logic_vector]
+data_types = [Bit, Std_logic, Std_logic_vector, Integer, Array]
 
 
 

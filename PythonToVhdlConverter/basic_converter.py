@@ -87,7 +87,7 @@ class Architecture():
         Returns:
             str: The VHDL code for an architecture with signals.
         """
-        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{style(CreateComponents().convert_component())}\n{self.create_signals()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend {self.architecture_class.name};"
+        return f"architecture {self.architecture_class.name} of {self.architecture_class.entity_name} is\n{style(CreateComponents().convert_component())}\n{self.create_signals()}\n{self.create_constants()}\n\tbegin\n{parse_file(self.architecture_class.path)}\n\tend {self.architecture_class.name};"
     def create_signals(self):
         """
         Creates VHDL signals.
@@ -102,6 +102,16 @@ class Architecture():
         for signal in self.architecture_class.signals:
             signals += signal.__str__() + ";\n"
         return style(signals)
+    
+    def create_constants(self):
+        constants = ""
+        try:
+            for constant in self.architecture_class.constants:
+                constants += constant.__str__() + ";\n"
+        except:
+            return ""
+        return style(constants)
+        
 
 class CreateComponents:
     def __init__(self):
@@ -156,3 +166,11 @@ class Signal():
         validate_data_types(type)
     def __str__(self):
         return f"signal {self.name} : {self.type.__repr__()}"
+    
+class Constant:
+    def __init__(self, name, type):
+        self.name = name
+        self.type = type
+        validate_data_types(type)
+    def __str__(self):
+        return f"constant {self.name} : {self.type.__repr__()}"
