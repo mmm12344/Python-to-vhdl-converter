@@ -1,16 +1,65 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
 entity Mux is
 port(
 	A : in std_logic;
+	C : in integer range 0 to 9;
+	F : in integer;
 	
 	B : out std_logic
 );
 end Mux;
 architecture behavior of Mux is
 
+	component mux4x1 is
+	port(
+		inp0 : in std_logic;
+		inp1 : in std_logic;
+		inp2 : in std_logic;
+		inp3 : in std_logic;
+		select : in std_logic_vector(1 downto 0);
+		
+		opt : out std_logic
+	);
+	end component;
+	component JKFlipFlop is
+	port(
+		clock : in std_logic;
+		j : in std_logic;
+		k : in std_logic;
+		
+		q : out std_logic;
+		qb : out std_logic
+	);
+	end component;
+	component deMux1x4 is
+	port(
+		inp : in std_logic;
+		select : in std_logic_vector(1 downto 0);
+		
+		opt0 : out std_logic;
+		opt1 : out std_logic;
+		opt2 : out std_logic;
+		opt3 : out std_logic
+	);
+	end component;
+
+
 	signal D : std_logic_vector(2 downto 0);
 	signal E : std_logic;
 
+	constant seven_segement_pattern : array ( 0 to 9 ) of std_logic_vector(6 downto 0);
+
 	begin
+		seven_segement_pattern ( 0 ) <= " 0000001 " ;
+		seven_segement_pattern ( 1 ) <= " 343454534 " ;
+		seven_segement_pattern ( 2 ) <= " 343454534 " ;
+		seven_segement_pattern ( 3 ) <= " 343454534 " ;
+		seven_segement_pattern ( 4 ) <= " 343454534 " ;
+		seven_segement_pattern ( 5 ) <= " 343454534 " ;
 		a <= b + a ;
 		b <= b sll 1 srl 2 ;
 		a ( 0 ) = " 10 " ;
