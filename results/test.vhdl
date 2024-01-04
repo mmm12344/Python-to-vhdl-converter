@@ -148,5 +148,6 @@ architecture behavior of Mux is
 			end case;
 		
 		end process;
-	c1  : mux4x1 port map(mario, m , ar);
+	c1  : mux4x1 port map(mario ( 0 ) ,m ,ar );
+
 	end behavior;

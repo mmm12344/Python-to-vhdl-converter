@@ -466,12 +466,17 @@ class PortMap_filter:
         for component in components:
             portmap_match = re.match(self.portmap_regex_exp(component.entity_class.name), self.line)
             if portmap_match:
-                self.map_list = portmap_match.group(2)
+                self.map_list = portmap_match.group(2).split(",")
                 self.var = portmap_match.group(1)
                 self.component_name = component.entity_class.name
                 
     def parse(self):
-        return f"{self.var} : {self.component_name} port map({self.map_list});"
+        result = f"{self.var} : {self.component_name} port map("
+        for item in self.map_list:
+            result += parse_text(item) + " ,"
+        result = result[:-1]
+        result += ");\n"
+        return result
     
     def is_portmap(line):
         def portmap_regex_exp(component_name):
