@@ -5,7 +5,7 @@ from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, log
 import time
 
 @Entity
-class Mux():
+class mux4x1():
     is_component = True
     name = "mux4x1"
     inputs = [Input("inp0", Std_logic()),Input("inp1", Std_logic()),Input("inp2", Std_logic()),Input("inp3", Std_logic()),Input("s", Std_logic_vector(2))] 
@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity = Mux
+    entity = mux4x1
 @logic
 def logic():
     @process
