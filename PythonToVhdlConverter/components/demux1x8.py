@@ -5,7 +5,7 @@ from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, log
 import time
 
 @Entity
-class DeMux1x8():
+class deMux1x8():
     is_component = True
     name = "deMux1x8"
     inputs = [Input("inp", Std_logic()), Input("s", Std_logic_vector(3))]
@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity = DeMux1x8
+    entity = deMux1x8
 
 @logic
 def logic():
@@ -94,4 +94,4 @@ def logic():
                 opt4 = '0'
                 opt5 = '0'
                 opt6 = '0'
-                opt7 = inp
+                opt7 = inp 
