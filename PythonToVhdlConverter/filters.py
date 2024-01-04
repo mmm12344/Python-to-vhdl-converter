@@ -367,7 +367,10 @@ class Match_Case_Condition_Filter:
                 if token.type == "match":
                     token_parameter = token.parameter
                 elif token.type == "case":
-                    parsed_block += style(f"{parse_text(output_var_value[index])} when {parse_text(token_parameter)} = {token.choice} else\n")
+                    if((index + 1) < (len(self.tokens) - 1)):
+                        parsed_block += style(f"{parse_text(output_var_value[index])} when {parse_text(token_parameter)} = {token.choice} else\n")
+                    else:
+                        parsed_block += style(f"{parse_text(output_var_value[index])} when {parse_text(token_parameter)} = {token.choice};\n")
                     index += 1
 
         if(self.inside_process):
@@ -466,12 +469,17 @@ class PortMap_filter:
         for component in components:
             portmap_match = re.match(self.portmap_regex_exp(component.entity_class.name), self.line)
             if portmap_match:
-                self.map_list = portmap_match.group(2)
+                self.map_list = portmap_match.group(2).split(",")
                 self.var = portmap_match.group(1)
                 self.component_name = component.entity_class.name
                 
     def parse(self):
-        return f"{self.var} : {self.component_name} port map({self.map_list});"
+        result = f"{self.var} : {self.component_name} port map("
+        for item in self.map_list:
+            result += parse_text(item) + " ,"
+        result = result[:-1]
+        result += ");\n"
+        return result
     
     def is_portmap(line):
         def portmap_regex_exp(component_name):
