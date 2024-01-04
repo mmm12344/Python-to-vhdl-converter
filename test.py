@@ -36,14 +36,14 @@ def logic():
     seven_segment_patterns[9] = " 0000100 "
 
     match (b):
-                case "00":
-                    y = "1000"
-                case "01":
-                    y = "0100"
-                case "10":
-                    y = "0110"
-                case "11":
-                    y = "1001"
+        case "00":
+            y = "1000"
+        case "01":
+            y = "0100"
+        case "10":
+            y = "0110"
+        case "11":
+            y = "1001"
 
     
                 
