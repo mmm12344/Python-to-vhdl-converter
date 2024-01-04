@@ -54,6 +54,8 @@ architecture behavior of Mux is
 		seven_segment_patterns ( 7 ) <= " 0001111 " ;
 		seven_segment_patterns ( 8 ) <= " 0000000 " ;
 		seven_segment_patterns ( 9 ) <= " 0000100 " ;
+		m <=	" 1000 " when ( a ) = "00" else
+			" 0100 " when ( a ) = "01" else
 		process (clock)
 		begin
 			qmario <= TMP ;
@@ -76,26 +78,34 @@ architecture behavior of Mux is
 		
 			mario <= 9 ;
 		
-			case ( mario ) is
-				when 2 =>
-						y <= 4 ;
-						case ( mario ) is
-							when 1 =>
-									y <= 4 ;
-							when 4 =>
-									x <= 2 ;
+			a <= 3 ;
+		
+			case ( a ) is
+				when " 00 " =>
+						m <= " 1000 " ;
+				when " 01 " =>
+						m <= " 0100 " ;
+						case ( a ) is
+							when " 00 " =>
+									m <= " 1000 " ;
+									case ( a ) is
+										when " 00 " =>
+												m <= " 1000 " ;
+										when " 01 " =>
+												m <= " 0100 " ;
+									end case;
+							when " 01 " =>
+									m <= " 0100 " ;
 						end case;
-				when 4 =>
-						case ( mario ) is
-							when 1 =>
-									y <= 4 ;
-							when 4 =>
-									x <= 2 ;
-						end case;
-						x <= 2 ;
+				when " 10 " =>
+						m <= " 0010 " ;
+				when " 11 " =>
+						m <= " 0001 " ;
 			end case;
 		
 		end process;
+		m <=	" 1000 " when ( a ) = "00" else
+			" 0100 " when ( a ) = "01" else
 		process (clock)
 		begin
 			if rising_edge ( clock ) then
@@ -108,6 +118,12 @@ architecture behavior of Mux is
 					else
 							TMP <= ' 1 ' ;
 					end if;
+					case ( a ) is
+						when " 00 " =>
+								m <= " 1000 " ;
+						when " 01 " =>
+								m <= " 0100 " ;
+					end case;
 			end if;
 		
 			q <= TMP ;
