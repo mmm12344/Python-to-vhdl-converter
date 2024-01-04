@@ -1,5 +1,6 @@
 import re
 from .lexer import parse_text
+from . import components
 
 ## if condition types
 
@@ -84,6 +85,9 @@ class Capture:
 
                 self.advance()
                 self.tokens.append(Process_filter(self.capture_process()))
+            elif PortMap_filter.is_portmap(self.current_line):
+                self.tokens.append(PortMap_filter(self.capture_portmap()))
+                self.advance()
             else:
                 self.tokens.append(Statement_filter(self.current_line))
                 self.advance()
@@ -172,6 +176,9 @@ class Capture:
             process_block_lines.append(self.current_line)
             self.advance()
         return process_block_lines
+    
+    def capture_portmap(self):
+        return self.current_line
                 
     
     def get_tokens(self):
@@ -442,4 +449,35 @@ class While_loop_filter:
         while_regex_exp = "\s*while (.+):"
         if re.match(while_regex_exp, line):
             return True
+        return False
+    
+    
+    
+class PortMap_filter:
+    def __init__(self, line):
+        self.line = line
+        self.map_list = ""
+        self.var = ""
+        self.component_name = ""
+        self.tokenize()
+    def portmap_regex_exp(self, component_name):
+        return f"\s*(.+).*=.*{component_name}.*\((.+)\)\s*$"
+    def tokenize(self):
+        for component in components:
+            portmap_match = re.match(self.portmap_regex_exp(component.entity_class.name), self.line)
+            if portmap_match:
+                self.map_list = portmap_match.group(2)
+                self.var = portmap_match.group(1)
+                self.component_name = component.entity_class.name
+                
+    def parse(self):
+        return f"{self.var} : {self.component_name} port map({self.map_list});"
+    
+    def is_portmap(line):
+        def portmap_regex_exp(component_name):
+            return f"\s*(.+).*=.*{component_name}.*\((.+\))\s*$"
+        for component in components:
+            portmap_match = re.match(portmap_regex_exp(component.entity_class.name), line)
+            if portmap_match:
+                return True
         return False

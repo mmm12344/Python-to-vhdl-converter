@@ -106,7 +106,13 @@ def logic():
                 case "01":
                     m = "0100"
         q = TMP
-        q = not TMP     
+        q = not TMP    
+        
+        match (a):
+            case "01":
+                if mario == 2:
+                    x = 0
+    c1 = mux4x1(mario, m , ar)
         
           
 
