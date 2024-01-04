@@ -22,6 +22,7 @@ architecture behavior of deMux1x4 is
 		process (inp, s)
 		begin
 			case s is
+
 				when "00" =>
 					opt0 <= inp ;
 					opt1 <= '0' ;
@@ -42,6 +43,7 @@ architecture behavior of deMux1x4 is
 					opt1 <= '0' ;
 					opt2 <= '0' ;
 					opt3 <= inp ;
+
 			end case;
 		
 		end process;

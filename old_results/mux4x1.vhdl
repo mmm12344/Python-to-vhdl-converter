@@ -22,13 +22,13 @@ architecture behavior of mux4x1 is
 		process (inp0,inp1,inp2,inp3,s)
 		begin
 			case s is
-				when "00" =>
+				when " 00 " =>
 					opt <= inp0 ;
-				when "01" =>
+				when " 01 " =>
 					opt <= inp1 ;
-				when "10" =>
+				when " 10 " =>
 					opt <= inp2 ;
-				when "11" =>
+				when " 11 " =>
 					opt <= inp3 ;
 			end case;
 		

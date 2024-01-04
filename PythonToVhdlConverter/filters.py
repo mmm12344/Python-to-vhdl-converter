@@ -7,6 +7,7 @@ if_type = "if"
 elif_type = "elif"
 else_type = "else"
 
+inside_process = False
 
 def style(block):
     styled = [""]
@@ -67,16 +68,20 @@ class Capture:
         self.tokenize()
         
     def tokenize(self):
+        global inside_process
+
         while self.current_line != None:
             if If_condition_filter.is_if(self.current_line):
                 self.tokens.append(If_condition_filter(self.capture_if()))
             elif Match_Case_Condition_Filter.is_match_case(self.current_line):
-                self.tokens.append(Match_Case_Condition_Filter(self.capture_match_case()))
+                self.tokens.append(Match_Case_Condition_Filter(self.capture_match_case(), inside_process))
             elif For_loop_filter.is_for(self.current_line):
                 self.tokens.append(For_loop_filter(self.capture_for()))
             elif While_loop_filter.is_while(self.current_line):
                 self.tokens.append(While_loop_filter(self.capture_while()))
             elif Process_filter.is_process(self.current_line):
+                inside_process = True
+
                 self.advance()
                 self.tokens.append(Process_filter(self.capture_process()))
             else:
@@ -123,7 +128,7 @@ class Capture:
                 break
             match_case_block_lines.append(self.current_line)
             self.advance()
-        
+
         return match_case_block_lines
     
     def capture_for(self):
@@ -199,6 +204,8 @@ class Process_filter:
         process_match = re.match(self.process_regex_exp, self.lines[0])
         self.sensitivity_list = process_match.group(1)
         self.tokens = Capture(self.lines[1:]).get_tokens()
+        global inside_process
+        inside_process = False # important! sets inside_process to false before parsing
     
     def parse(self):
         parsed_block = f"process ({self.sensitivity_list})\nbegin\n"
@@ -284,8 +291,9 @@ class If_condition_filter:
         return False
     
 class Match_Case_Condition_Filter:
-    def __init__(self, lines):
+    def __init__(self, lines, inside_process):
         self.lines = lines
+        self.inside_process = inside_process
         self.match_case_regex_exp = "\s*match (.+):$"
         self.case_regex_exp = "\s*case (.+):$"
         self.tokens = []
@@ -293,35 +301,74 @@ class Match_Case_Condition_Filter:
         pass
 
     def tokenize(self):
-        for line in self.lines:
-            match_case_match = re.match(self.match_case_regex_exp, line)
-            case_match = re.match(self.case_regex_exp, line)
+        index = 0
+        parent_line = self.lines[0]
+        found_match = False
+        
+        while index < len(self.lines):
+            match_case_match = re.match(self.match_case_regex_exp, self.lines[index])
+            case_match = re.match(self.case_regex_exp, self.lines[index])
 
-            if match_case_match:
+            if match_case_match and (found_match == False):
+                parent_line = self.lines[index]
+                found_match = True
                 token = Match_Case_Token("match", match_case_match.group(1), None)
-                self.tokens.append(token)
             elif case_match:
+                parent_line = self.lines[index]
+                found_match = True
                 token = Match_Case_Token("case", None, case_match.group(1))
-                self.tokens.append(token)
             else:
-                self.tokens[-1].add_statement(Statement_filter(line))
+                to_capture = []
+                
+                while ((index + 1) <= len(self.lines)) and ((len(parent_line) - len(parent_line.lstrip())) < (len(self.lines[index]) - len(self.lines[index].lstrip()))):
+                    to_capture.append(self.lines[index])
+                    index+=1
+
+                self.tokens[-1].add_statement(Capture(to_capture))
+                found_match = False                
                 continue
+
+            self.tokens.append(token)
+            index += 1
 
         
     def parse(self):
         parsed_block = ''
 
+        filtered_statement = []
+        token_parameter = ''
+        output_var = ''
+        output_var_value = []
+
+        index = 0
+
         for token in self.tokens:
-            if token.type == "match":
-                parsed_block += f"case {parse_text(token.parameter)} is\n"
-            elif token.type == "case":
-                parsed_block += style(f"when {parse_text(token.choice)} =>\n")
-            
-            for statement in token.statements:
-                parsed_block += style(f"{statement.parse()}")
+            if(self.inside_process):
+                if token.type == "match":
+                    parsed_block += f"case {parse_text(token.parameter)} is\n"
+                elif token.type == "case":
+                    parsed_block += style(f"when {parse_text(token.choice)} =>\n")
+                
+                for statement in token.statements:
+                    parsed_block += style(f"{statement.parse()}")
 
+            else:
+                for statement in token.statements:
+                    filtered_statement = re.findall(r"\w+|\".*\"", statement.parse())
+                    output_var_value.append(filtered_statement[1])
 
-        parsed_block += "end case;\n"
+                if token.type == "match":
+                    token_parameter = token.parameter
+                elif token.type == "case":
+                    parsed_block += style(f"{parse_text(output_var_value[index])} when {parse_text(token_parameter)} = {token.choice} else\n")
+                    index += 1
+
+        if(self.inside_process):
+            parsed_block += "end case;\n"
+        else:
+            output_var = filtered_statement[0]
+            parsed_block = f"{output_var} <=" + parsed_block 
+
         return style(parsed_block)
 
     def is_match_case(line):
