@@ -44,7 +44,8 @@ architecture behavior of _7segController is
 		seven_segment_patterns ( 7 ) <= "0001111" ;
 		seven_segment_patterns ( 8 ) <= "0000000" ;
 		seven_segment_patterns ( 9 ) <= "0000100" ;
-	deMux_inst  : deMux1x4 port map('1',count,demux_output[0],demux_output[1],demux_output[2],demux_output[3]);	process ( clk , rst )
+	deMux_inst  : deMux1x4 port map('1' ,count ,demux_output ( 0 ) ,demux_output ( 1 ) ,demux_output ( 2 ) ,demux_output ( 3 ) );
+		process ( clk , rst )
 		begin
 			if rst = '1' then
 					count <= 0 ;

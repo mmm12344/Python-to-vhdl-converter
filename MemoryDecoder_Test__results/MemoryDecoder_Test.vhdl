@@ -23,6 +23,7 @@ architecture behavior of MemoryAddressDecoder is
 
 
 	begin
-	decoderinst  : decoder3x8 port map(address,D);	S <= D ;
+	decoderinst  : decoder3x8 port map(address ,D );
+		S <= D ;
 
 	end behavior;
