@@ -1,7 +1,7 @@
 from PythonToVhdlConverter.basic_converter import Entity, Input, Output, Signal, Architecture , Constant
 from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector ,  Integer, Array
 from PythonToVhdlConverter.to_vhdl import save_to_file
-from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
+from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge 
 from PythonToVhdlConverter.components import demux1x4
 import time
 
@@ -39,6 +39,9 @@ def logic():
     seven_segment_patterns[7] = " 0001111 "
     seven_segment_patterns[8] = " 0000000 "
     seven_segment_patterns[9] = " 0000100 "
+    
+    deMux_inst = deMux1x4('1',count,demux_output[0],demux_output[1],demux_output[2],demux_output[3])
+    
     @process
     def process( clk , rst ):
         if rst == '1':
