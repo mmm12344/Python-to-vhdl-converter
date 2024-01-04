@@ -35,11 +35,15 @@ def logic():
     seven_segment_patterns[8] = " 0000000 "
     seven_segment_patterns[9] = " 0000100 "
 
-    match (a):
-            case "00":
-                m = "1000"
-            case "01":
-                m = "0100"
+    match (b):
+                case "00":
+                    y = "1000"
+                case "01":
+                    y = "0100"
+                case "10":
+                    y = "0110"
+                case "11":
+                    y = "1001"
 
     
                 
@@ -83,10 +87,14 @@ def logic():
                 m = "0001"
 
     match (a):
-            case "00":
-                m = "1000"
-            case "01":
-                m = "0100"
+                case "00":
+                    m = "1000"
+                case "01":
+                    m = "0100"
+                case "10":
+                    m = "0110"
+                case "11":
+                    m = "1001"
         
     @process
     def process(clock):
@@ -105,6 +113,10 @@ def logic():
                     m = "1000"
                 case "01":
                     m = "0100"
+                case "10":
+                    m = "0110"
+                case "11":
+                    m = "1001"
         q = TMP
         q = not TMP    
         
