@@ -306,7 +306,7 @@ class Statement_filter:
 class Process_filter:
     def __init__(self, lines):
         self.lines = lines 
-        self.process_regex_exp = "\s*def .+\((.+)\):"
+        self.process_regex_exp = "\s*def .+\((.*)\):"
         self.sensitivity_list = ""
         self.tokens = []
         self.tokenize()
