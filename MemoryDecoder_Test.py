@@ -6,7 +6,7 @@ from PythonToVhdlConverter.components import decoder3x8
 import time
 
 @Entity
-class MemoryAddressDecoder ():
+class MemoryAddressDecoder():
     name = "MemoryAddressDecoder"
     inputs = [Input("address", Std_logic_vector(3))]
     outputs = [Output("S", Std_logic_vector(8))]
@@ -16,12 +16,16 @@ class Arch():
     path = __file__
     signals = [Signal("D", Std_logic_vector(8))]
     name = "behavior"
-    entity_name = "MemoryAddressDecoder"
+    entity = MemoryAddressDecoder
                
 @logic
 def logic():
-   
+   decoderinst = decoder3x8(address,D)
    S = D
-        
+
+
 
 save_to_file()
+        
+
+
