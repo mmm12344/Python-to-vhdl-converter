@@ -577,7 +577,7 @@ class PortMap_filter:
             result += parse_text(item) + " ,"
         result = result[:-1]
         result += ");\n"
-        return result
+        return style(result)
     
     def is_portmap(line):
         def portmap_regex_exp(component_name):
