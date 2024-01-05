@@ -8,7 +8,7 @@ if_type = "if"
 elif_type = "elif"
 else_type = "else"
 
-inside_process = False
+inside_process = False # flag to determine if match-case statement is inside a process block
 
 def style(block):
     styled = [""]
@@ -60,7 +60,23 @@ class While_loop_token:
         
 
 class Capture:
+    """
+    A class to capture code blocks (if-elif-else, match-case, for, while, etc..)
+ 
+    Attributes:
+        lines (list): 
+        pos(int): 
+        current_line (int): 
+        tokens (list): 
+    """
     def __init__(self, lines):
+        """
+        Initializes a capture object.
+ 
+        Parameters:
+            lines (list): 
+        """
+
         self.lines = lines
         self.pos = -1
         self.current_line = None
@@ -69,8 +85,20 @@ class Capture:
         self.tokenize()
         
     def tokenize(self):
+        """
+        Tokenizes the code block and appends the tokens to the tokens list.
+    
+        Args:
+            ...
+    
+        Returns:
+            ...
+        """
         global inside_process
 
+        # matches the current line to the corresponding code block,
+        # calls on the corresponding capture function 
+        # and appends the filtered code block to the tokens list
         while self.current_line != None:
             if If_condition_filter.is_if(self.current_line):
                 self.tokens.append(If_condition_filter(self.capture_if()))
@@ -97,23 +125,50 @@ class Capture:
         self.current_line = self.lines[self.pos] if self.pos < len(self.lines) else None
     
     def get_leading_white_sapces(self, line):
+        """
+        Calculates the leading whitespace for the given line.
+    
+        Args:
+            line (str): the line to calculate the leading whitespace for.
+    
+        Returns:
+            int: The leading whitespace count.
+        """
         return len(line) - len(line.lstrip())
     
     def is_child(self, parent_line, child_line):
+        """
+        Determines whether a given line or statement is inside a code block. 
+    
+        Args:
+            parent_line (str):
+            child_line (str):
+    
+        Returns:
+            bool: whether child_line is a child to parent_line
+        """
         if self.get_leading_white_sapces(parent_line) < self.get_leading_white_sapces(child_line):
             return True
         return False
     
     def capture_if(self):
-        if_regex_exp = "\s*if (.+):$"
+        """
+        Captures if-elif-else block.
+    
+        Args:
+            ...
+    
+        Returns:
+            list (str): the if-elif-else block.
+        """
+        #if_regex_exp = "\s*if (.+):$"
         elif_regex_exp = "\s*elif (.+):$"
         else_regex_exp = "\s*else(.*):$"
         if_block_lines = []
         if_line = self.current_line
-        if_block_lines.append(if_line)
+        if_block_lines.append(if_line) # current_line was already verified to be an if-statement
         self.advance()
         while self.current_line != None:
-            
             if not self.is_child(if_line, self.current_line) and not re.match(elif_regex_exp, self.current_line) and not re.match(else_regex_exp, self.current_line):
                 break
             if_block_lines.append(self.current_line)
@@ -122,8 +177,17 @@ class Capture:
         return if_block_lines
 
     def capture_match_case(self):
+        """
+        Captures match-case block.
+    
+        Args:
+            ...
+    
+        Returns:
+            list (str): the match-case block.
+        """
         match_case_block_lines = []
-        match_case_block_lines.append(self.current_line)
+        match_case_block_lines.append(self.current_line)  # current_line was already verified to be a match-case statement
         match_line = self.current_line
         self.advance()
 
@@ -136,10 +200,18 @@ class Capture:
         return match_case_block_lines
     
     def capture_for(self):
-        
+        """
+        Captures for-block.
+    
+        Args:
+            ...
+    
+        Returns:
+            list (str): the for-block.
+        """
         for_block_lines = []     
         for_block_lines.append(self.current_line)
-        for_line = self.current_line
+        for_line = self.current_line  # current_line was already verified to be a for-statement
         self.advance()
         
         while self.current_line != None:
@@ -151,10 +223,18 @@ class Capture:
         return for_block_lines
     
     def capture_while(self):
-        
+        """
+        Captures while-block.
+    
+        Args:
+            ...
+    
+        Returns:
+            list (str): the while-block.
+        """
         while_block_lines = []     
         while_block_lines.append(self.current_line)
-        while_line = self.current_line
+        while_line = self.current_line  # current_line was already verified to be an while-statement
         self.advance()
         
         while self.current_line != None:
@@ -166,9 +246,18 @@ class Capture:
         return while_block_lines
     
     def capture_process(self):
+        """
+        Captures process-block.
+    
+        Args:
+            ...
+    
+        Returns:
+            list (str): the process-block.
+        """
         process_block_lines = []
         process_line = self.current_line
-        process_block_lines.append(process_line)
+        process_block_lines.append(process_line)  # current_line was already verified to be an process-statement
         self.advance()
         while self.current_line != None:
             if not self.is_child(process_line, self.current_line):
@@ -185,6 +274,15 @@ class Capture:
         return self.tokens
     
     def parse(self):
+        """
+        Calls on the token's corresponding parse method.
+    
+        Args:
+            ...
+    
+        Returns:
+            str: the parsed block.
+        """
         parsed_block = ""
         for token in self.tokens:
             parsed_block += token.parse()
@@ -479,7 +577,7 @@ class PortMap_filter:
             result += parse_text(item) + " ,"
         result = result[:-1]
         result += ");\n"
-        return result
+        return style(result)
     
     def is_portmap(line):
         def portmap_regex_exp(component_name):

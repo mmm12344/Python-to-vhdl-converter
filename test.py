@@ -125,6 +125,16 @@ def logic():
                 if mario == 2:
                     x = 0
     c1 = mux4x1(mario[0], m , ar)
+    
+    match (b):
+        case "00":
+            y = "1000"
+        case "01":
+            y = "0100"
+        case "10":
+            y = "0110"
+        case "11":
+            y = "1001"
         
           
 
