@@ -22,25 +22,24 @@ class Arch():
 
 @logic
 def logic():
-    uut = comparator_VHDL(A,B,A_less_B,A_equal_B,A_greater_B)
+    uut = comparator_VHDL( A , B , A_less_B , A_equal_B , A_greater_B )
     @process
     def process():
-        for i in range(3):
-          A = to_std_logic_vector( to_unsigned(i,2) )
+        for i in range(0, 3):
+          A = to_std_logic_vector( to_unsigned( i , 2 ) )
           B = to_std_logic_vector( to_unsigned(i + 1 , 2) )
           time.sleep(20)
 
-        for i in range(3):
+        for i in range(0,3):
           A = to_std_logic_vector( to_unsigned(i + 1 , 2) )
-          B = to_std_logic_vector( to_unsigned(i,2) )
+          B = to_std_logic_vector( to_unsigned( i , 2 ) )
           time.sleep(20)
-          
-        for i in range(3):
-          A = to_std_logic_vector( to_unsigned(i,2) )
-          B = to_std_logic_vector( to_unsigned(i,2) )
-          time.sleep(20) 
+
+        for i in range(0,3):
+          A = to_std_logic_vector( to_unsigned( i , 2 ) )
+          B = to_std_logic_vector( to_unsigned( i , 2 ) )
+          time.sleep(20)  
           
 
-    
 
 save_to_file()

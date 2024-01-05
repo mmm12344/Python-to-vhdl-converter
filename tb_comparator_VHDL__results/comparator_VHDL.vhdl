@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity comparator_VHDL  is
+entity comparator_VHDL is
 port(
 	A : in std_logic_vector(1 downto 0);
 	b : in std_logic_vector(1 downto 0);
@@ -12,8 +12,8 @@ port(
 	A_equal_B : out std_logic;
 	A_greater_B : out std_logic
 );
-end comparator_VHDL ;
-architecture comparator_structural of comparator_VHDL  is
+end comparator_VHDL;
+architecture comparator_structural of comparator_VHDL is
 
 	signal tmp1 : std_logic;
 	signal tmp2 : std_logic;

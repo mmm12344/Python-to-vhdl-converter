@@ -7,7 +7,7 @@ import time
 @Entity
 class comparator_VHDL():
    is_component = True
-   name = "comparator_VHDL "
+   name = "comparator_VHDL"
    inputs = [Input("A", Std_logic_vector(2)), Input("b", Std_logic_vector(2))]
    outputs = [Output("A_less_B", Std_logic()),Output("A_equal_B", Std_logic()),Output("A_greater_B", Std_logic())]
    
