@@ -124,7 +124,7 @@ def logic():
             case "01":
                 if mario == 2:
                     x = 0
-    c1 = mux4x1(mario, m , ar)
+    c1 = mux4x1(mario[0], m , ar)
         
           
 
