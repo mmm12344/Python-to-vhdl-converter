@@ -3,7 +3,7 @@ from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector, I
 from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
 import time
-import comparator
+import comparator_VHDL
 
 @Entity
 class tb_comparator_VHDL():
@@ -22,21 +22,22 @@ class Arch():
 
 @logic
 def logic():
-    uut = comparator(A,B,A_less_B,A_equal_B,A_greater_B)
+    uut = comparator_VHDL(A,B,A_less_B,A_equal_B,A_greater_B)
     @process
     def process():
         for i in range(3):
-          A = 2
-          B = 2
+          A = to_std_logic_vector( to_unsigned(i,2) )
+          B = to_std_logic_vector( to_unsigned(i + 1 , 2) )
           time.sleep(20)
+
         for i in range(3):
-          A =2
-          B = 2
+          A = to_std_logic_vector( to_unsigned(i + 1 , 2) )
+          B = to_std_logic_vector( to_unsigned(i,2) )
           time.sleep(20)
+          
         for i in range(3):
-          s
-          A =2
-          B = 2
+          A = to_std_logic_vector( to_unsigned(i,2) )
+          B = to_std_logic_vector( to_unsigned(i,2) )
           time.sleep(20) 
           
 
