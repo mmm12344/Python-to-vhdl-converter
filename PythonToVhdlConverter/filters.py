@@ -598,7 +598,7 @@ class PortMap_filter:
 class Wait_filter:
     def __init__(self, line):
         self.line = line
-        self.wait_regex_exp = "\s*time.sleep\((.+)\)\s*$"
+        self.wait_regex_exp = "\s*time.sleep\((.*)\)\s*$"
         self.wait_time = ""
         self.tokenize()
     def tokenize(self):
@@ -606,9 +606,11 @@ class Wait_filter:
         if match:
             self.wait_time = match.group(1)
     def parse(self):
-        return style(f"wait for {self.wait_time} ns;\n")
+        if self.wait_time.strip():
+            return style(f"wait for {self.wait_time} ns;\n")
+        return style(f"wait;\n")
     def is_wait(line):
-        wait_regex_exp = "\s*time.sleep\((.+)\)\s*$"
+        wait_regex_exp = "\s*time.sleep\((.*)\)\s*$"
         if re.match(wait_regex_exp, line):
             return True
         return False
