@@ -3,7 +3,7 @@ from PythonToVhdlConverter.data_types import Bit, Std_logic, Std_logic_vector, I
 from PythonToVhdlConverter.to_vhdl import save_to_file
 from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, logic, process, rising_edge, falling_edge
 import time
-import comparator_VHDL
+import comparator_VHDL as comparator_VHDL
 
 @Entity
 class tb_comparator_VHDL():
