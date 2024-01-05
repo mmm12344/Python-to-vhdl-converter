@@ -21,6 +21,9 @@ class Arch():
 
 @logic
 def logic():
+    
+    time.sleep(2)
+    
     count = 0
     demux_output = "0000"
     
@@ -135,6 +138,8 @@ def logic():
             y = "0110"
         case "11":
             y = "1001"
+            
+    f = (a + b)
         
           
 
