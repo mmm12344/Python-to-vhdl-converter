@@ -51,7 +51,7 @@ def logic():
     
                 
     @process
-    def process(clock):
+    def process():
         
         qmario = TMP
         qkdjfksjf = not TMP 
@@ -140,6 +140,8 @@ def logic():
             y = "1001"
             
     f = (a + b)
+    
+    mario = to_std_logic_vector( to_unsigned(mario) )
         
           
 

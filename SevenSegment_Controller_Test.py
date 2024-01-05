@@ -55,6 +55,9 @@ def logic():
                
 
     seg = seven_segment_patterns[count]
+    
+    
+    
     anode = demux_output    
 
 
