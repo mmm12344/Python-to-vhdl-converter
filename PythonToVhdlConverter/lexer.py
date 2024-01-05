@@ -2,8 +2,8 @@ import re
 
 digits = "0123456789"
 literals = "thequickbrownfoxjumpsoverthelazydog"
-break_string_symbols = """['"]<>-+*/%^<>=!()"""
-symbols = """'"_<>-+*/%^<>=!|"""
+break_string_symbols = """['"]<>-+*/%^<>=!(),"""
+symbols = """'"_<>-+*/%^<>=!|,"""
 
 variable_regex_exp = "^([A-Z]|[a-z])+(_*|[0-9]|[A-Z]|[a-z])*$"
 
