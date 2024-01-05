@@ -49,6 +49,8 @@ architecture behavior of tb_comparator_VHDL is
 					wait for 20 ns;
 			end loop;
 		
+			wait;
+		
 		end process;
 
 	end behavior;

@@ -39,6 +39,7 @@ def logic():
           A = to_std_logic_vector( to_unsigned( i , 2 ) )
           B = to_std_logic_vector( to_unsigned( i , 2 ) )
           time.sleep(20)  
+        time.sleep()
           
 
 
