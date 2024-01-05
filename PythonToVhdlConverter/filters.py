@@ -116,6 +116,9 @@ class Capture:
             elif PortMap_filter.is_portmap(self.current_line):
                 self.tokens.append(PortMap_filter(self.capture_portmap()))
                 self.advance()
+            elif Wait_filter.is_wait(self.current_line):
+                self.tokens.append(Wait_filter(self.capture_wait()))
+                self.advance()
             else:
                 self.tokens.append(Statement_filter(self.current_line))
                 self.advance()
@@ -267,6 +270,9 @@ class Capture:
         return process_block_lines
     
     def capture_portmap(self):
+        return self.current_line
+    
+    def capture_wait(self):
         return self.current_line
                 
     
@@ -586,4 +592,23 @@ class PortMap_filter:
             portmap_match = re.match(portmap_regex_exp(component.entity_class.name), line)
             if portmap_match:
                 return True
+        return False
+    
+    
+class Wait_filter:
+    def __init__(self, line):
+        self.line = line
+        self.wait_regex_exp = "\s*time.sleep\((.+)\)\s*$"
+        self.wait_time = ""
+        self.tokenize()
+    def tokenize(self):
+        match = re.match(self.wait_regex_exp, self.line)
+        if match:
+            self.wait_time = match.group(1)
+    def parse(self):
+        return style(f"wait for {self.wait_time} ns;\n")
+    def is_wait(line):
+        wait_regex_exp = "\s*time.sleep\((.+)\)\s*$"
+        if re.match(wait_regex_exp, line):
+            return True
         return False

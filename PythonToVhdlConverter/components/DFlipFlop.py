@@ -5,9 +5,9 @@ from PythonToVhdlConverter.logic_converter import nand, xnor, nor, sra, sla, log
 import time
 
 @Entity
-class dFlipFlop():
+class DFlipFlop():
     is_component = True
-    name = "dFlipFlop"
+    name = "DFlipFlop"
     inputs = [Input("clock", Std_logic()), Input("d", Std_logic())]
     outputs = [Output("q", Std_logic())]
 
@@ -16,7 +16,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity = dFlipFlop
+    entity = DFlipFlop
 
 @logic
 def logic():

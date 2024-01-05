@@ -6,9 +6,9 @@ import time
 
 
 @Entity
-class deMux1x4():
+class demux1x4():
     is_component = True
-    name = "deMux1x4"
+    name = "demux1x4"
     inputs = [Input("inp", Std_logic()), Input("s", Std_logic_vector(2))]
     outputs = [Output("opt0", Std_logic()), Output("opt1", Std_logic()), Output("opt2", Std_logic()), Output("opt3", Std_logic())]
 
@@ -17,7 +17,7 @@ class Arch():
     path = __file__
     signals = []
     name = "behavior"
-    entity = deMux1x4
+    entity = demux1x4
 
 @logic
 def logic():
