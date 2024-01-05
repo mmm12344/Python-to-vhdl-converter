@@ -51,3 +51,5 @@ right_parentheses_tok = Token(")", ")")
 
 single_quotation_tok = Token("'", "'")
 double_quotation_tok = Token('''"''', '''"''')
+
+coma_tok = Token(",", ",")

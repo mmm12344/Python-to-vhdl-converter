@@ -568,7 +568,7 @@ class PortMap_filter:
         self.component_name = ""
         self.tokenize()
     def portmap_regex_exp(self, component_name):
-        return f"\s*(.+).*=.*{component_name}.*\((.+)\)\s*$"
+        return f"\s*(.+)\s*=\s*{component_name}.*\((.+)\)\s*$"
     def tokenize(self):
         for component in components:
             portmap_match = re.match(self.portmap_regex_exp(component.entity_class.name), self.line)
