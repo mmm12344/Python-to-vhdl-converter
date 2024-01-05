@@ -142,6 +142,8 @@ def logic():
     f = (a + b)
     
     mario = to_std_logic_vector( to_unsigned(mario) )
+    
+    time.sleep()
         
           
 
