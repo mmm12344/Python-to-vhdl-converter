@@ -52,6 +52,8 @@ class Entity():
         Returns:
             str: VHDL code for an entity.
         """
+        if len(self.entity_class.inputs) == 0 and len(self.entity_class.outputs) == 0:
+            return f"{Packages().get_Packages()}\n\nentity {self.entity_class.name} is\nend {self.entity_class.name};"
         return f"{Packages().get_Packages()}\n\nentity {self.entity_class.name} is\nport(\n{self.create_port()}\n);\nend {self.entity_class.name};"
     def create_port(self):
         """

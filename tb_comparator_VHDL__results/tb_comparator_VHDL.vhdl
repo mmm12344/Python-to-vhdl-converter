@@ -4,9 +4,6 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity tb_comparator_VHDL is
-port(
-
-);
 end tb_comparator_VHDL;
 architecture behavior of tb_comparator_VHDL is
 	component comparator_VHDL is
@@ -29,7 +26,7 @@ architecture behavior of tb_comparator_VHDL is
 
 	begin
 		uut  : comparator_VHDL port map(A ,B ,A_less_B ,A_equal_B ,A_greater_B );
-		process ()
+		process
 		begin
 			for i in 0 to 3 loop
 					A <= to_std_logic_vector ( to_unsigned ( i , 2 ) ) ;

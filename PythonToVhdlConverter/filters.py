@@ -319,7 +319,10 @@ class Process_filter:
         inside_process = False # important! sets inside_process to false before parsing
     
     def parse(self):
-        parsed_block = f"process ({self.sensitivity_list})\nbegin\n"
+        if self.sensitivity_list.strip() == "":
+            parsed_block = f"process\nbegin\n"
+        else:
+            parsed_block = f"process ({self.sensitivity_list})\nbegin\n"
         for token in self.tokens:
             parsed_block += token.parse() + "\n"
         parsed_block += "end process;\n"
