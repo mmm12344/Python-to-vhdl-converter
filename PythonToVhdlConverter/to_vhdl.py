@@ -13,3 +13,5 @@ def save_to_file():
         print(file["architicture"].file_name)
         with open(f"{folder_name}/"+file["architicture"].file_name+".vhdl", "w") as f:
             f.writelines(convert_to_vhdl(file["entity"], file["architicture"]))
+            
+            

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pythonToVhdlConverter"
+version = "0.0.1"
+authors = [
+  { name="Mario Morcos", email="mariomorcoswassily@gmail.com" },
+  { name="Omar Khaled", email="school.omarkhaled@gmail.com"},
+  { name="Sameh Maher Kalach", email="samehkalash0@gmail.com"},
+]
+description = "A tool to Convert Python To Vhdl with ease!"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/mmm12344/Python-to-vhdl-converter"
+Issues = "https://github.com/mmm12344/Python-to-vhdl-converter/issues"
